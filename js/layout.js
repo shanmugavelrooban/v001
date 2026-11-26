@@ -11,6 +11,31 @@
   var cfg = window.BFW_CONFIG || {};
   var waNum = cfg.WHATSAPP_NUMBER || "917871326620";
   var ENQUIRIES_KEY = "bfw_enquiries_v1";
+  var SITE_IMAGES_KEY = "bfw_site_images_v1";
+
+  function applyCustomSiteImages() {
+    var map = {};
+    try { map = JSON.parse(localStorage.getItem(SITE_IMAGES_KEY) || "{}") || {}; } catch (e) { map = {}; }
+    var SEC = window.BFW_SEC;
+    if (map["site-logo"]) {
+      var safeLogo = SEC ? SEC.safeImageSrc(map["site-logo"]) : map["site-logo"];
+      document.querySelectorAll(".brand__logo, .footer__brand-name img, .auth-box__crest img").forEach(function (img) {
+        img.setAttribute("src", safeLogo);
+      });
+    }
+    document.querySelectorAll("[data-site-img]").forEach(function (img) {
+      var key = img.getAttribute("data-site-img");
+      if (key && map[key]) {
+        var safeSrc = SEC ? SEC.safeImageSrc(map[key]) : map[key];
+        img.setAttribute("src", safeSrc);
+      }
+    });
+  }
+
+  window.BFW_SITE_IMAGES = {
+    KEY: SITE_IMAGES_KEY,
+    apply: applyCustomSiteImages
+  };
 
   function waLink(text) {
     return "https://wa.me/" + waNum + "?text=" + encodeURIComponent(text);
@@ -264,5 +289,11 @@
   window.addEventListener("focus", updateCopyrightYear);
   document.addEventListener("visibilitychange", function () {
     if (!document.hidden) updateCopyrightYear();
+  });
+
+  // Apply any custom website images configured in Admin Controls and sync across tabs in real time
+  applyCustomSiteImages();
+  window.addEventListener("storage", function (e) {
+    if (e.key === SITE_IMAGES_KEY) applyCustomSiteImages();
   });
 })();

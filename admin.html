@@ -11,15 +11,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Jost:wght@400;500;600&amp;display=swap">
-  <link rel="stylesheet" href="css/style.css?v=18">
-  <link rel="stylesheet" href="css/animations.css?v=18">
-  <link rel="stylesheet" href="css/responsive.css?v=18">
-  <link rel="stylesheet" href="css/admin.css?v=18">
-  <script src="js/config.js?v=18"></script>
-  <script src="js/security.js?v=18" defer></script>
-  <script src="js/products-data.js?v=18" defer></script>
-  <script src="js/layout.js?v=18" defer></script>
-  <script src="js/admin.js?v=18" defer></script>
+  <link rel="stylesheet" href="css/style.css?v=21">
+  <link rel="stylesheet" href="css/animations.css?v=21">
+  <link rel="stylesheet" href="css/responsive.css?v=21">
+  <link rel="stylesheet" href="css/admin.css?v=21">
+  <script src="js/config.js?v=21"></script>
+  <script src="js/security.js?v=21" defer></script>
+  <script src="js/products-data.js?v=21" defer></script>
+  <script src="js/layout.js?v=21" defer></script>
+  <script src="js/admin.js?v=21" defer></script>
 </head>
 <body class="admin-body">
   <main class="admin-main">
@@ -146,9 +146,10 @@
         </div>
       </div>
 
-      <!-- Task 3: Tab shows "Admin ID & Password Change" + unread notification count badge -->
+      <!-- Admin Tabs: Products, Website Images, Requirement Notifications, Admin ID & Password Change -->
       <div class="admin-tabs" role="tablist" aria-label="Admin sections">
-        <button class="admin-tab" type="button" role="tab" data-tab="products" aria-selected="true">Products (D:\data)</button>
+        <button class="admin-tab" type="button" role="tab" data-tab="products" aria-selected="true">Products &amp; Images</button>
+        <button class="admin-tab" type="button" role="tab" data-tab="images" aria-selected="false">Website Section Images</button>
         <button class="admin-tab" type="button" role="tab" data-tab="submissions" aria-selected="false">
           <span>Requirement Notifications</span>
           <span class="notif-badge" id="tab-notif-badge" hidden>0</span>
@@ -251,7 +252,8 @@
                   <input id="prod-order" name="sortOrder" type="number" min="0" max="9999" value="100">
                 </div>
                 <div class="field field--checkbox">
-                  <label><input id="prod-visible" name="visible" type="checkbox" checked> Visible in public showcase</label>
+                  <label><input id="prod-visible" name="visible" type="checkbox" checked> Visible in Shop</label>
+                  <label><input id="prod-featured" name="featured" type="checkbox" checked> Show on Home Page</label>
                 </div>
               </div>
 
@@ -282,6 +284,20 @@
             </table>
           </div>
         </div>
+      </section>
+
+      <!-- TAB 1B: WEBSITE SECTION IMAGES (Logo, Home Category Tiles, About Page Story Images) -->
+      <section class="admin-panel" id="tab-images" role="tabpanel">
+        <div class="panel-bar">
+          <div>
+            <h2>Website Section Images Control</h2>
+            <p class="privacy-note">Change the Brand Logo, Home Page Category Images, and About Page Story Images directly from here.</p>
+          </div>
+          <div class="panel-actions">
+            <button class="btn btn--ghost btn--small" id="reset-site-images-btn" type="button">Reset All Website Images to Default</button>
+          </div>
+        </div>
+        <div class="site-images-grid" id="site-images-grid"></div>
       </section>
 
       <!-- TAB 2: SUBMISSIONS / WHATSAPP REQUIREMENT NOTIFICATIONS -->

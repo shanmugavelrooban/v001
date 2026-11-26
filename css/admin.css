@@ -23,10 +23,10 @@
   flex-direction: column;
 }
 
-/* ---------- Full-Screen Borderless Split Admin Validation ---------- */
+/* ---------- Full-Screen Borderless Split Admin Validation (with Floating Sign-In Card) ---------- */
 .auth-split {
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
+  grid-template-columns: 1.18fr 0.82fr;
   width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
@@ -41,7 +41,8 @@
 
 .auth-split__media {
   position: relative;
-  min-height: 440px;
+  min-height: 100vh;
+  min-height: 100dvh;
   background: #120c0e url("../assets/images/hero-video-fallback.jpg") center / cover no-repeat;
   display: flex;
   align-items: center;
@@ -128,6 +129,11 @@
 .auth-box {
   width: min(100%, 430px);
   text-align: center;
+  padding: clamp(1.8rem, 3.2vw, 2.5rem);
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+  box-shadow: var(--shadow), var(--glow);
+  animation: floatY 6s ease-in-out infinite;
 }
 .auth-box__crest {
   display: flex;
@@ -502,8 +508,39 @@
 }
 .field--checkbox {
   display: flex;
-  align-items: flex-end;
-  padding-bottom: 0.6rem;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  padding-bottom: 0.3rem;
+}
+.site-images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+.site-img-card {
+  background: var(--glass-strong);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.site-img-card__preview {
+  width: 100%;
+  height: 170px;
+  border-radius: var(--radius-sm);
+  background: var(--media-stage);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: 0.6rem;
+}
+.site-img-card__preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .admin-pwd-card {
   max-width: 640px;
@@ -568,15 +605,28 @@
 }
 .toast.is-visible { display: block; animation: fadeUp 0.35s var(--ease); }
 
-@media (max-width: 960px) {
-  .auth-split { grid-template-columns: 1fr; }
-  .auth-split__media { min-height: 300px; }
-  .admin-grid-2 { grid-template-columns: 1fr; }
+/* Task 3: When screen size decreases (<= 900px), automatically hide/stop side video and ONLY show the floating Sign-In page */
+@media (max-width: 900px) {
+  .auth-split {
+    grid-template-columns: 1fr;
+  }
+  .auth-split__media {
+    display: none !important;
+  }
+  .auth-split__pane {
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 4.2rem 1.25rem 2rem;
+  }
+  .admin-grid-2 {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 640px) {
-  .auth-split__media { min-height: 240px; padding: 1.5rem; }
-  .auth-split__pane { padding: 1.6rem 1.2rem 2.2rem; }
+  .auth-box {
+    padding: 1.5rem 1.15rem;
+  }
   .admin-dashboard { padding: 1rem; }
   .admin-bottom-bar .btn { flex: 1 1 140px; }
 }

@@ -296,7 +296,7 @@
     return card;
   }
 
-  /* Home page: featured showcase */
+  /* Home page: featured showcase (auto-refreshes when Admin changes any product image) */
   function initFeatured() {
     var grid = document.getElementById("featured-grid");
     if (!grid) return;
@@ -307,6 +307,10 @@
       observeReveal(grid);
     });
   }
+
+  window.addEventListener("storage", function (e) {
+    if (e.key === "bfw_admin_products") initFeatured();
+  });
 
   window.BFW = { loadProducts: loadProducts, productCard: productCard, observeReveal: observeReveal, enquiryHref: enquiryHref, sanitizeProduct: sanitizeProduct };
 

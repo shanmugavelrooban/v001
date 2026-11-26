@@ -86,33 +86,39 @@
       t = setTimeout(function () { state.q = SEC.cleanText(search.value, 60); render(); }, 120);
     });
 
-    window.BFW.loadProducts().then(function (list) {
-      all = list;
-      // Dynamically add filter chips for any new custom categories added in Admin Panel
-      var chipsWrap = document.querySelector(".chips");
-      if (chipsWrap) {
-        var existing = {};
-        chips.forEach(function (c) { existing[c.getAttribute("data-filter")] = true; });
-        all.forEach(function (p) {
-          if (p.category && !existing[p.category]) {
-            existing[p.category] = true;
-            var newChip = SEC.el("button", {
-              class: "chip",
-              type: "button",
-              "data-filter": p.category,
-              "aria-pressed": "false",
-              text: p.categoryLabel || p.category,
-              onclick: function () {
-                state.cat = p.category;
-                render();
-              }
-            });
-            chipsWrap.appendChild(newChip);
-            chips.push(newChip);
-          }
-        });
-      }
-      render();
+    function loadAndRenderShop() {
+      window.BFW.loadProducts().then(function (list) {
+        all = list;
+        var chipsWrap = document.querySelector(".chips");
+        if (chipsWrap) {
+          var existing = {};
+          chips.forEach(function (c) { existing[c.getAttribute("data-filter")] = true; });
+          all.forEach(function (p) {
+            if (p.category && !existing[p.category]) {
+              existing[p.category] = true;
+              var newChip = SEC.el("button", {
+                class: "chip",
+                type: "button",
+                "data-filter": p.category,
+                "aria-pressed": "false",
+                text: p.categoryLabel || p.category,
+                onclick: function () {
+                  state.cat = p.category;
+                  render();
+                }
+              });
+              chipsWrap.appendChild(newChip);
+              chips.push(newChip);
+            }
+          });
+        }
+        render();
+      });
+    }
+
+    loadAndRenderShop();
+    window.addEventListener("storage", function (e) {
+      if (e.key === "bfw_admin_products") loadAndRenderShop();
     });
   });
 })();
