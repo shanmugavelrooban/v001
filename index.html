@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://*.google.com https://*.googleusercontent.com; object-src 'none'; base-uri 'self'; form-action 'self' https://script.google.com; frame-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Blooms &amp; Flame Wax — Hand-poured Candles from Tamil Nadu</title>
+  <meta name="description" content="Blooms & Flame Wax — hand-poured floral, sculpted and festive candles made in Kattangudi, Tamil Nadu. Light up your moments.">
+  <meta name="theme-color" content="#1d1418">
+  <link rel="icon" href="assets/images/logo-bfw.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&amp;family=Jost:wght@300;400;500;600&amp;display=swap">
+  <link rel="stylesheet" href="css/style.css?v=18">
+  <link rel="stylesheet" href="css/animations.css?v=18">
+  <link rel="stylesheet" href="css/responsive.css?v=18">
+  <script src="js/config.js?v=18"></script>
+  <script src="js/security.js?v=18" defer></script>
+  <script src="js/products-data.js?v=18" defer></script>
+  <script src="js/layout.js?v=18" defer></script>
+  <script src="js/main.js?v=18" defer></script>
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Fixed background video (supplied video) + fallback image + overlay -->
+  <div class="bg-video" aria-hidden="true">
+    <video class="bg-video__media" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback>
+      <source data-src="assets/videos/candle-bg.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="bg-video__overlay" aria-hidden="true"></div>
+  <canvas class="particles" aria-hidden="true"></canvas>
+
+  <header id="site-header"></header>
+  <noscript><div class="noscript-note"><a href="index.html">Home</a><a href="shop.html">Shop</a><a href="about.html">About</a><a href="contact.html">Contact</a></div></noscript>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero__grid hero__grid--single">
+        <div class="hero__content">
+          <p class="eyebrow">Hand-poured in Kattangudi, Tamil Nadu</p>
+          <h1 class="hero__title" id="hero-title">Light up <br><em>your moments</em></h1>
+          <p class="hero__text">Sculpted roses, tender tulips, playful bubble cubes and festive diyas — every Blooms &amp; Flame Wax candle is poured slowly by hand, so it glows like a memory and gifts like a keepsake.</p>
+          <p class="hero__note">Always trim the wick to 5&nbsp;mm and never leave a burning candle unattended.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#showcase">Shop now <span class="flame" aria-hidden="true"></span></a>
+            <a class="btn btn--ghost" href="about.html">Our story</a>
+          </div>
+        </div>
+      </div>
+      <a class="hero__scroll" href="#showcase">Scroll</a>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Hand-poured</span><span>Sculpted florals</span><span>Festive diyas</span><span>Gift ready</span><span>Made in Tamil Nadu</span><span>Custom orders</span>
+        <span>Hand-poured</span><span>Sculpted florals</span><span>Festive diyas</span><span>Gift ready</span><span>Made in Tamil Nadu</span><span>Custom orders</span>
+      </div>
+    </div>
+
+    <!-- PRODUCT SHOWCASE (Shop Now scrolls here) -->
+    <section class="section section--glass" id="showcase" aria-labelledby="showcase-title">
+      <div class="container">
+        <div class="section__head" data-reveal="up">
+          <p class="eyebrow">The collection</p>
+          <h2 class="section__title" id="showcase-title">Featured candles</h2>
+          <p class="section__lead">A glimpse of our studio favourites. Tap “Enquire” on any candle and we’ll get back to you with details.</p>
+        </div>
+        <div class="product-grid" id="featured-grid" aria-live="polite">
+          <p class="empty-state">Loading candles…</p>
+        </div>
+        <div class="center-actions"><a class="btn btn--ghost" href="shop.html">View full collection</a></div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="section" aria-labelledby="cat-title">
+      <div class="container">
+        <div class="section__head" data-reveal="up">
+          <p class="eyebrow">Shop by mood</p>
+          <h2 class="section__title" id="cat-title">Four ways to glow</h2>
+        </div>
+        <div class="cat-grid">
+          <a class="cat-tile" href="shop.html?cat=floral" data-reveal="up">
+            <img src="assets/images/products/tulip-bouquet.png" alt="" loading="lazy">
+            <div><h3>Floral Blooms</h3><p>Roses, tulips, lotus &amp; daisies</p></div>
+          </a>
+          <a class="cat-tile" href="shop.html?cat=love" data-reveal="up">
+            <img src="assets/images/products/holding-hands-heart.png" alt="" loading="lazy">
+            <div><h3>Love &amp; Gifting</h3><p>Keepsakes for the ones you love</p></div>
+          </a>
+          <a class="cat-tile" href="shop.html?cat=sculpted" data-reveal="up">
+            <img src="assets/images/products/peach-bubble-sphere.png" alt="" loading="lazy">
+            <div><h3>Sculpted Bubbles</h3><p>Modern shapes, playful colour</p></div>
+          </a>
+          <a class="cat-tile" href="shop.html?cat=festive" data-reveal="up">
+            <img src="assets/images/products/festive-diya-gift-box.png" alt="" loading="lazy">
+            <div><h3>Festive Diyas</h3><p>Terracotta diyas, gift boxed</p></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CRAFT -->
+    <section class="section section--solid" aria-labelledby="craft-title">
+      <div class="container">
+        <div class="section__head" data-reveal="up">
+          <p class="eyebrow">Slow-made</p>
+          <h2 class="section__title" id="craft-title">From melt to glow</h2>
+        </div>
+        <div class="steps">
+          <div class="step" data-reveal="left"><h3>Melt</h3><p>Wax is melted gently at low heat and tinted by hand in small batches.</p></div>
+          <div class="step" data-reveal="up"><h3>Pour &amp; sculpt</h3><p>Poured into detailed silicone moulds and left to set slowly for crisp petals and clean edges.</p></div>
+          <div class="step" data-reveal="right"><h3>Cure &amp; wrap</h3><p>Each candle is trimmed, checked, sealed and packed with our BFW seal — ready to gift.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section" aria-label="Why Blooms and Flame Wax">
+      <div class="container features">
+        <div class="feature" data-reveal="up">
+          <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 3c2 3 4 5 4 8a4 4 0 0 1-8 0c0-3 2-5 4-8z"/><path d="M8 21h8M12 15v6"/></svg></div>
+          <h3>Hand-poured</h3><p>Small batches, made with patience.</p>
+        </div>
+        <div class="feature" data-reveal="up">
+          <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 21c-5-3-8-6-8-10a4 4 0 0 1 8-2 4 4 0 0 1 8 2c0 4-3 7-8 10z"/></svg></div>
+          <h3>Made to gift</h3><p>Sealed, boxed and ready for any occasion.</p>
+        </div>
+        <div class="feature" data-reveal="up">
+          <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg></div>
+          <h3>Quality checked</h3><p>Every candle inspected before it leaves.</p>
+        </div>
+        <div class="feature" data-reveal="up">
+          <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16l-1 4z"/><path d="M14 6l3 3"/></svg></div>
+          <h3>Custom orders</h3><p>Colours &amp; quantities for events on request.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section">
+      <div class="container">
+        <div class="cta" data-reveal="zoom">
+          <p class="eyebrow">Weddings · Return gifts · Festivals</p>
+          <h2>Looking for a custom candle gift?</h2>
+          <p>Tell us the occasion, colours and quantity — our studio will reply with ideas and availability.</p>
+          <a class="btn btn--primary" href="contact.html">Message Email</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+</body>
+</html>

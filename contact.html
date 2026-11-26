@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://*.google.com https://*.googleusercontent.com; object-src 'none'; base-uri 'self'; form-action 'self' https://script.google.com https://*.google.com https://*.googleusercontent.com; frame-src 'self' https://script.google.com https://script.googleusercontent.com https://*.google.com https://*.googleusercontent.com">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Contact — Blooms &amp; Flame Wax</title>
+  <meta name="description" content="Contact the Blooms & Flame Wax studio for enquiries, custom orders and gifting.">
+  <meta name="theme-color" content="#1d1418">
+  <link rel="icon" href="assets/images/logo-bfw.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&amp;family=Jost:wght@300;400;500;600&amp;display=swap">
+  <link rel="stylesheet" href="css/style.css?v=18">
+  <link rel="stylesheet" href="css/animations.css?v=18">
+  <link rel="stylesheet" href="css/responsive.css?v=18">
+  <script src="js/config.js?v=18"></script>
+  <script src="js/security.js?v=18" defer></script>
+  <script src="js/layout.js?v=18" defer></script>
+  <script src="js/main.js?v=18" defer></script>
+  <script src="js/contact.js?v=18" defer></script>
+</head>
+<body data-page="contact">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="bg-video" aria-hidden="true">
+    <video class="bg-video__media" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback>
+      <source data-src="assets/videos/candle-bg.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="bg-video__overlay" aria-hidden="true"></div>
+  <canvas class="particles" aria-hidden="true"></canvas>
+
+  <header id="site-header"></header>
+  <noscript><div class="noscript-note">This form needs JavaScript. You can also reach us on WhatsApp +91 78713 26620. <a href="index.html">Home</a></div></noscript>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Say hello</p>
+        <h1 class="page-hero__title">Contact us</h1>
+        <p class="page-hero__lead">Questions, custom orders or gifting ideas — send us a message and the studio will reply within 1–2 working days.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container contact-grid">
+        <aside class="card" data-reveal="left" aria-labelledby="studio-title">
+          <p class="eyebrow">Studio</p>
+          <h2 id="studio-title">Visit or call</h2>
+          <ul class="info-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span>317 South Street, Kattangudi, Aruppukottai, Virudhunagar, Tamil Nadu</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><a href="tel:+917871326620">+91 78713 26620</a></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><a href="contact.html">bloomsflamewax</a></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Tue–Sat · 10:00–18:00 IST</span></li>
+          </ul>
+          <a class="btn btn--whatsapp" href="https://wa.me/917871326620" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+        </aside>
+
+        <div class="card" data-reveal="right">
+          <p class="eyebrow">Send Message in Email</p>
+          <h2>Message Email</h2>
+          <form class="form" id="contact-form" novalidate autocomplete="on">
+            <div class="form__row">
+              <div class="field">
+                <label for="name">Your name <span class="req">*</span></label>
+                <input id="name" name="name" type="text" maxlength="80" autocomplete="name" required aria-describedby="name-error">
+                <span class="field__error" id="name-error" aria-live="polite"></span>
+              </div>
+              <div class="field">
+                <label for="email">E-mail address <span class="privacy-note">(optional)</span></label>
+                <input id="email" name="email" type="email" maxlength="254" autocomplete="email" placeholder="Optional" aria-describedby="email-error">
+                <span class="field__error" id="email-error" aria-live="polite"></span>
+              </div>
+            </div>
+            <div class="form__row">
+              <div class="field">
+                <label for="phone">Phone number <span class="req">*</span></label>
+                <input id="phone" name="phone" type="tel" maxlength="20" autocomplete="tel" inputmode="tel" placeholder="+91 " required aria-describedby="phone-error">
+                <span class="field__error" id="phone-error" aria-live="polite"></span>
+              </div>
+              <div class="field">
+                <label for="product">Candle of interest (optional)</label>
+                <input id="product" name="product" type="text" maxlength="80" placeholder="e.g. Aqua Rose Bloom">
+                <span class="field__error"></span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="message">Message <span class="req">*</span></label>
+              <textarea id="message" name="message" maxlength="2000" required aria-describedby="message-error message-count"></textarea>
+              <span class="field__hint" id="message-count">0 / 2000</span>
+              <span class="field__error" id="message-error" aria-live="polite"></span>
+            </div>
+            <!-- Honeypot: hidden from people, bots fill it in -->
+            <div class="hp-field" aria-hidden="true">
+              <label for="website">Leave this empty</label>
+              <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+            </div>
+            <button class="btn btn--primary" type="submit"><span class="spinner" aria-hidden="true"></span><span data-label>Message Email</span></button>
+            <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+            <p class="privacy-note">Your details are used only to reply to your message. The submission date &amp; time is recorded automatically.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+</body>
+</html>

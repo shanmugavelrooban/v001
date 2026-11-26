@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://*.google.com https://*.googleusercontent.com; object-src 'none'; base-uri 'self'; form-action 'self' https://script.google.com https://*.google.com https://*.googleusercontent.com; frame-src 'self' https://script.google.com https://script.googleusercontent.com https://*.google.com https://*.googleusercontent.com">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Studio Admin — Blooms &amp; Flame Wax</title>
+  <link rel="icon" href="assets/images/logo-bfw.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Jost:wght@400;500;600&amp;display=swap">
+  <link rel="stylesheet" href="css/style.css?v=18">
+  <link rel="stylesheet" href="css/animations.css?v=18">
+  <link rel="stylesheet" href="css/responsive.css?v=18">
+  <link rel="stylesheet" href="css/admin.css?v=18">
+  <script src="js/config.js?v=18"></script>
+  <script src="js/security.js?v=18" defer></script>
+  <script src="js/products-data.js?v=18" defer></script>
+  <script src="js/layout.js?v=18" defer></script>
+  <script src="js/admin.js?v=18" defer></script>
+</head>
+<body class="admin-body">
+  <main class="admin-main">
+    <!-- FULL-SCREEN BORDERLESS SPLIT ADMIN SIGN-IN VIEW -->
+    <section class="auth-split" id="login-view" aria-labelledby="login-title">
+      <!-- Left: Dripping Candle Animation Video (Clean, No Front Text Overlay) -->
+      <div class="auth-split__media">
+        <video class="auth-split__video" autoplay muted loop playsinline preload="auto" poster="assets/images/hero-video-fallback.jpg">
+          <source src="assets/videos/candle-drip.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <!-- Right: Theme-Adaptive Sign-In Form (Theme Icon Switcher Fixed at Top-Right) -->
+      <div class="auth-split__pane">
+        <!-- Task 1: Theme mode icons fixed to top-right side of validation page -->
+        <div class="auth-top-right-theme">
+          <div class="theme-switch" role="group" aria-label="Theme mode">
+            <button type="button" class="theme-switch__btn" data-set-theme="dark" aria-label="Dark Mode" title="Dark Mode">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+            </button>
+            <button type="button" class="theme-switch__btn" data-set-theme="auto" aria-label="Auto Mode (Morning Light / Night Dark)" title="Auto Mode (Morning 6 AM–6 PM Light · Night 6 PM–6 AM Dark)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/><path d="M12 7v5l3 2"/></svg>
+            </button>
+            <button type="button" class="theme-switch__btn" data-set-theme="light" aria-label="Light Mode" title="Light Mode">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2 12h2.5M19.5 12H22M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="auth-box">
+          <div class="auth-box__crest" aria-hidden="true">
+            <img src="assets/images/logo-bfw.png" alt="" width="44" height="44">
+            <div class="auth-box__divider"><span>BFW</span></div>
+          </div>
+
+          <h1 class="auth-box__title" id="login-title">Welcome Back</h1>
+          <p class="auth-box__lead" id="login-hint">Sign in to continue your journey with BFW.</p>
+
+          <div class="auth-pill-bar" aria-hidden="true">
+            <span class="auth-pill-bar__active">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Sign In
+            </span>
+          </div>
+
+          <form class="form auth-form" id="login-form" novalidate autocomplete="off">
+            <div class="field">
+              <label class="visually-hidden" for="admin-id">Admin ID or Email</label>
+              <div class="input-icon-wrap">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                <input id="admin-id" name="adminId" type="email" required maxlength="120" autocomplete="off" placeholder="Enter your email">
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="visually-hidden" for="admin-password">Admin Password</label>
+              <div class="input-icon-wrap">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                <input id="admin-password" name="password" type="password" required minlength="6" maxlength="200" autocomplete="current-password" placeholder="Enter your password">
+                <button class="pwd-eye-btn" id="toggle-pwd-btn" type="button" aria-label="Show password" title="Show / hide password">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="auth-meta-row">
+              <label class="auth-remember">
+                <input id="remember-admin" name="remember" type="checkbox" checked>
+                <span>Remember Me</span>
+              </label>
+              <button class="auth-forgot-btn" id="forgot-pwd-btn" type="button">Forgot Password?</button>
+            </div>
+
+            <!-- Task 1: Button name changed to Sign In -->
+            <button class="btn btn--primary auth-submit-btn" type="submit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>
+              <span data-label>Sign In</span>
+            </button>
+
+            <div class="form-status" id="login-status" role="status" aria-live="polite"></div>
+
+            <!-- Bottom Actions under Sign In button: View Website & Log Out -->
+            <div class="auth-bottom-actions">
+              <a class="btn btn--ghost btn--small" href="index.html">View Website</a>
+              <button class="btn btn--ghost btn--small" id="login-logout-btn" type="button">Log Out</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- FULL-SCREEN BORDERLESS VALIDATED ADMIN DASHBOARD VIEW -->
+    <section class="admin-dashboard" id="dashboard-view" hidden>
+      <div class="admin-dashboard__top">
+        <a class="brand" href="index.html">
+          <img class="brand__logo" src="assets/images/logo-bfw.png" alt="" width="42" height="42">
+          <span class="brand__name">Blooms <span>&amp;</span> Flame Wax · Studio Admin</span>
+        </a>
+        <div class="theme-switch" role="group" aria-label="Dashboard theme mode">
+          <button type="button" class="theme-switch__btn" data-set-theme="dark" aria-label="Dark Mode" title="Dark Mode">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          </button>
+          <button type="button" class="theme-switch__btn" data-set-theme="auto" aria-label="Auto Mode (Morning Light / Night Dark)" title="Auto Mode (Morning 6 AM–6 PM Light · Night 6 PM–6 AM Dark)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/><path d="M12 7v5l3 2"/></svg>
+          </button>
+          <button type="button" class="theme-switch__btn" data-set-theme="light" aria-label="Light Mode" title="Light Mode">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2 12h2.5M19.5 12H22M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-card__label">Catalogue Products</div>
+          <div class="stat-card__value" id="stat-products">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__label">Visible on Website</div>
+          <div class="stat-card__value" id="stat-visible">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__label">Unread Notifications</div>
+          <div class="stat-card__value" id="stat-submissions">0</div>
+        </div>
+      </div>
+
+      <!-- Task 3: Tab shows "Admin ID & Password Change" + unread notification count badge -->
+      <div class="admin-tabs" role="tablist" aria-label="Admin sections">
+        <button class="admin-tab" type="button" role="tab" data-tab="products" aria-selected="true">Products (D:\data)</button>
+        <button class="admin-tab" type="button" role="tab" data-tab="submissions" aria-selected="false">
+          <span>Requirement Notifications</span>
+          <span class="notif-badge" id="tab-notif-badge" hidden>0</span>
+        </button>
+        <button class="admin-tab" type="button" role="tab" data-tab="security" aria-selected="false">Admin ID &amp; Password Change</button>
+      </div>
+
+      <!-- TAB 1: PRODUCTS -->
+      <section class="admin-panel is-active" id="tab-products" role="tabpanel">
+        <div class="panel-bar">
+          <h2>Product Showcase Catalogue</h2>
+          <div class="panel-actions">
+            <button class="btn btn--primary btn--small" id="new-product-btn" type="button">+ New Product</button>
+            <button class="btn btn--ghost btn--small" id="seed-products-btn" type="button">Reset 16 Studio Products</button>
+            <button class="btn btn--ghost btn--small" id="export-products-btn" type="button">Export CSV</button>
+          </div>
+        </div>
+
+        <div class="admin-grid-2">
+          <div class="card" id="product-form-card">
+            <h3 id="product-form-title">Add New Product</h3>
+            <form class="form" id="product-form" novalidate>
+              <div class="field">
+                <label for="prod-id">Product ID (slug)</label>
+                <input id="prod-id" name="id" type="text" maxlength="60" placeholder="auto-generated from name">
+              </div>
+              <div class="field">
+                <label for="prod-name">Candle Name <span class="req">*</span></label>
+                <input id="prod-name" name="name" type="text" maxlength="80" placeholder="e.g. Aqua Rose Bloom" required>
+              </div>
+
+              <!-- Task 2: Category is now an editable text input + datalist so admin can type any new category item -->
+              <div class="form__row">
+                <div class="field">
+                  <label for="prod-category">Category (Type New or Select) <span class="req">*</span></label>
+                  <input id="prod-category" name="category" type="text" maxlength="40" list="category-options" placeholder="Type new or choose (e.g. Floral Blooms)" required>
+                  <datalist id="category-options">
+                    <option value="Floral Blooms"></option>
+                    <option value="Love &amp; Gifting"></option>
+                    <option value="Sculpted Bubbles"></option>
+                    <option value="Festive Diyas"></option>
+                  </datalist>
+                </div>
+                <div class="field">
+                  <label for="prod-badge">Badge (optional)</label>
+                  <input id="prod-badge" name="badge" type="text" maxlength="24" placeholder="Signature / New">
+                </div>
+              </div>
+
+              <!-- Task 3: Editable Offer Box + Display Price + Sort Order -->
+              <div class="form__row">
+                <div class="field">
+                  <label for="prod-offer">Special Offer / Discount (editable)</label>
+                  <input id="prod-offer" name="offer" type="text" maxlength="40" placeholder="e.g. 20% OFF / Buy 2 Get 1">
+                </div>
+                <div class="field">
+                  <label for="prod-price">Display Price (optional)</label>
+                  <input id="prod-price" name="price" type="text" maxlength="20" placeholder="e.g. ₹299 or Price on request">
+                </div>
+              </div>
+
+              <!-- Task 3: 3 Images per Product (*Important Image 1 Required, Image 2 & Image 3 Optional) -->
+              <div class="field">
+                <label for="prod-image">Image 1 (Main Image — *Important Required) <span class="req">*</span></label>
+                <div class="img-input-row">
+                  <input id="prod-image" name="image" type="text" maxlength="500000" list="studio-images" placeholder="assets/images/products/aqua-rose.png" required>
+                  <label class="btn btn--ghost btn--small img-upload-btn" title="Choose image file from computer">
+                    Choose File
+                    <input type="file" accept="image/*" data-target-input="prod-image" hidden>
+                  </label>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="prod-image2">Image 2 (2nd View — Optional)</label>
+                <div class="img-input-row">
+                  <input id="prod-image2" name="image2" type="text" maxlength="500000" list="studio-images" placeholder="Optional 2nd image path or file">
+                  <label class="btn btn--ghost btn--small img-upload-btn" title="Choose 2nd image file">
+                    Choose File
+                    <input type="file" accept="image/*" data-target-input="prod-image2" hidden>
+                  </label>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="prod-image3">Image 3 (3rd View — Optional)</label>
+                <div class="img-input-row">
+                  <input id="prod-image3" name="image3" type="text" maxlength="500000" list="studio-images" placeholder="Optional 3rd image path or file">
+                  <label class="btn btn--ghost btn--small img-upload-btn" title="Choose 3rd image file">
+                    Choose File
+                    <input type="file" accept="image/*" data-target-input="prod-image3" hidden>
+                  </label>
+                </div>
+              </div>
+              <datalist id="studio-images"></datalist>
+
+              <div class="form__row">
+                <div class="field">
+                  <label for="prod-order">Sort Order</label>
+                  <input id="prod-order" name="sortOrder" type="number" min="0" max="9999" value="100">
+                </div>
+                <div class="field field--checkbox">
+                  <label><input id="prod-visible" name="visible" type="checkbox" checked> Visible in public showcase</label>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="prod-desc">Description <span class="req">*</span></label>
+                <textarea id="prod-desc" name="description" maxlength="500" placeholder="Describe the candle design, wax, and occasion…" required></textarea>
+              </div>
+
+              <div class="panel-actions">
+                <button class="btn btn--primary btn--small" type="submit">Save Product</button>
+                <button class="btn btn--ghost btn--small" id="prod-reset-btn" type="button">Clear / New</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="table-wrap">
+            <table class="admin-table" aria-label="Products catalogue">
+              <thead>
+                <tr>
+                  <th>Images (1–3)</th>
+                  <th>Candle &amp; Offer</th>
+                  <th>Category</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="products-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: SUBMISSIONS / WHATSAPP REQUIREMENT NOTIFICATIONS -->
+      <section class="admin-panel" id="tab-submissions" role="tabpanel">
+        <div class="panel-bar">
+          <div>
+            <h2>WhatsApp &amp; Contact Requirement Notifications</h2>
+            <p class="privacy-note">Click any unread notification row (or "Mark Read") to read it and decrease the notification counter.</p>
+          </div>
+          <div class="panel-actions">
+            <button class="btn btn--ghost btn--small" id="refresh-submissions-btn" type="button">Refresh</button>
+            <button class="btn btn--ghost btn--small" id="export-submissions-btn" type="button">Export safe CSV</button>
+            <button class="btn btn--ghost btn--small btn-danger" id="clear-submissions-btn" type="button">Clear All</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table" aria-label="Requirement notifications">
+            <thead>
+              <tr>
+                <th>Received</th>
+                <th>Source</th>
+                <th>Contact</th>
+                <th>Requirement / Product</th>
+                <th>Notified Message (Click to Read)</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="submissions-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- TAB 3: ONLY ADMIN ID & PASSWORD CHANGE -->
+      <section class="admin-panel" id="tab-security" role="tabpanel">
+        <div class="card admin-pwd-card">
+          <h3>Admin ID &amp; Password Change</h3>
+          <p class="section__lead">Update your Admin Email ID and Password below.</p>
+          <form class="form" id="password-form" novalidate autocomplete="off">
+            <div class="field">
+              <label for="new-admin-id">Admin ID / Email <span class="req">*</span></label>
+              <input id="new-admin-id" name="newAdminId" type="email" required placeholder="Enter new admin email">
+            </div>
+            <div class="field">
+              <label for="cur-password">Current Password <span class="req">*</span></label>
+              <input id="cur-password" name="currentPassword" type="password" required autocomplete="off" placeholder="Enter current password">
+            </div>
+            <div class="field">
+              <label for="new-password">New Password (min 10 chars) <span class="req">*</span></label>
+              <input id="new-password" name="newPassword" type="password" required minlength="10" autocomplete="new-password" placeholder="Enter new password (10+ chars)">
+            </div>
+            <div class="panel-actions">
+              <button class="btn btn--primary btn--small" type="submit">Update Admin ID &amp; Password</button>
+            </div>
+            <div class="form-status" id="pwd-change-status" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Bottom Action Bar in Validated Admin: View Website & Log Out at the Bottom -->
+      <footer class="admin-bottom-bar">
+        <a class="btn btn--ghost" href="index.html">View Website</a>
+        <button class="btn btn--primary" id="logout-btn" type="button">Log Out</button>
+      </footer>
+    </section>
+  </main>
+
+  <div class="toast" id="admin-toast" role="status" aria-live="polite"></div>
+</body>
+</html>
