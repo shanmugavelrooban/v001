@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-pref="auto">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact Blooms Flame Wax (BFW). Inquiries save directly to Google Sheets with instant Gmail studio notification." />
+  <title>Contact Us | Blooms Flame Wax · BFW</title>
+
+  <script src="js/theme.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <div class="bg-video-stage" aria-hidden="true">
+    <video id="bgCandleVideo" class="bg-video-stage__video" autoplay muted loop playsinline preload="auto" poster="assets/images/hero-video-fallback.jpg">
+      <source src="assets/videos/candle-bg.mp4" type="video/mp4" />
+    </video>
+    <div class="bg-video-stage__overlay"></div>
+    <div class="bg-video-stage__glow"></div>
+    <canvas id="emberParticles" class="bg-video-stage__particles"></canvas>
+  </div>
+
+  <div class="site-shell">
+    <header class="site-header" id="siteHeader">
+      <div class="container nav-bar">
+        <a href="index.html" class="brand-link" aria-label="Blooms Flame Wax Home">
+          <img src="assets/icons/flame-mark.svg" alt="" width="28" height="28" />
+          <span>Blooms Flame Wax<small class="brand-sub">BFW · Light Up Your Moments</small></span>
+        </a>
+
+        <nav aria-label="Primary navigation">
+          <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html" aria-current="page">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-controls">
+          <div class="theme-switcher" role="group" aria-label="Color theme mode">
+            <button type="button" class="theme-switcher__btn" data-theme-btn="light">Light</button>
+            <button type="button" class="theme-switcher__btn" data-theme-btn="dark">Dark</button>
+            <button type="button" class="theme-switcher__btn" data-theme-btn="auto">Auto</button>
+          </div>
+          <button type="button" class="sound-toggle" id="soundToggle" aria-pressed="false">Sound: Off</button>
+          <button type="button" class="nav-toggle" id="navToggle" aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation menu">
+            <span class="nav-toggle__bars"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" class="site-main">
+      <section class="page-hero">
+        <div class="container page-hero__inner reveal is-visible">
+          <span class="eyebrow">Direct Studio Inquiries</span>
+          <h1 class="section-title">Connect With Blooms Flame Wax</h1>
+          <p class="section-lead">Send an inquiry about any perfume edition below and stay right on this page for instant confirmation.</p>
+        </div>
+      </section>
+
+      <section class="section" style="padding-top: 1.25rem;">
+        <div class="container contact-layout">
+          <aside class="glass-panel studio-info reveal">
+            <div>
+              <span class="eyebrow">Studio Directory</span>
+              <h2 class="section-title" style="font-size: 2rem; margin-top: 0.35rem;">Studio Details</h2>
+            </div>
+            <ul class="info-list">
+              <li>
+                <span class="info-list__label">Studio Location</span>
+                <span>[Your Studio Street Address, City, Country]</span>
+              </li>
+              <li>
+                <span class="info-list__label">Studio Phone</span>
+                <span>[Your Public Phone Number Placeholder]</span>
+              </li>
+              <li>
+                <span class="info-list__label">Studio Hours</span>
+                <span>Monday – Saturday · 10:00 AM – 6:00 PM [Placeholder]</span>
+              </li>
+              <li>
+                <span class="info-list__label">Private Routing</span>
+                <span>Saved directly to Google Sheets via Google Apps Script with instant Gmail notification—no private emails exposed in frontend code.</span>
+              </li>
+            </ul>
+          </aside>
+
+          <div class="glass-panel contact-form-card reveal" data-delay="1">
+            <form id="contactForm" class="contact-form" novalidate>
+              <div class="hp-field" aria-hidden="true">
+                <label for="websiteUrl">Leave blank</label>
+                <input type="text" id="websiteUrl" name="websiteUrl" tabindex="-1" autocomplete="off" />
+              </div>
+
+              <div class="form-group">
+                <label for="visitorName">Visitor Name <span class="required">*</span></label>
+                <input type="text" id="visitorName" name="name" class="form-control" placeholder="Enter your full name" required />
+                <span class="field-error" id="nameError" role="alert"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="visitorEmail">Email Address <span class="required">*</span></label>
+                <input type="email" id="visitorEmail" name="email" class="form-control" placeholder="name@example.com" required />
+                <span class="field-error" id="emailError" role="alert"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="visitorPhone">Phone Number</label>
+                <input type="tel" id="visitorPhone" name="phone" class="form-control" placeholder="+00 000 000 0000 (optional)" />
+                <span class="field-error" id="phoneError" role="alert"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="visitorMessage">Message <span class="required">*</span></label>
+                <textarea id="visitorMessage" name="message" class="form-control" placeholder="Tell us which perfume edition or inquiry you would like to discuss..." required></textarea>
+                <span class="field-error" id="messageError" role="alert"></span>
+              </div>
+
+              <button type="submit" id="submitBtn" class="btn btn--primary" style="width: 100%;">
+                <span id="submitBtnText">Send Inquiry</span>
+              </button>
+
+              <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <a href="index.html" class="brand-link">
+          <img src="assets/icons/flame-mark.svg" alt="" width="24" height="24" />
+          <span>Blooms Flame Wax · BFW</span>
+        </a>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="footer-copy">
+          <span>&copy; <span id="currentYear"></span> Blooms Flame Wax — Light Up Your Moments.</span>
+          <span>[Your Studio City &amp; Address Placeholder]</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/contact.js" defer></script>
+</body>
+</html>

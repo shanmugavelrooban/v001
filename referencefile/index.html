@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-pref="auto">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Blooms Flame Wax (BFW) — Light Up Your Moments. Artisanal hand-poured botanical candle showcase." />
+  <title>Blooms Flame Wax · BFW | Light Up Your Moments</title>
+
+  <script src="js/theme.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <div class="bg-video-stage" aria-hidden="true">
+    <video id="bgCandleVideo" class="bg-video-stage__video" autoplay muted loop playsinline preload="auto" poster="assets/images/hero-video-fallback.jpg">
+      <source src="assets/videos/candle-bg.mp4" type="video/mp4" />
+    </video>
+    <div class="bg-video-stage__overlay"></div>
+    <div class="bg-video-stage__glow"></div>
+    <canvas id="emberParticles" class="bg-video-stage__particles"></canvas>
+  </div>
+
+  <div class="site-shell">
+    <header class="site-header" id="siteHeader">
+      <div class="container nav-bar">
+        <a href="index.html" class="brand-link" aria-label="Blooms Flame Wax Home">
+          <img src="assets/icons/flame-mark.svg" alt="" width="28" height="28" />
+          <span>Blooms Flame Wax<small class="brand-sub">BFW · Light Up Your Moments</small></span>
+        </a>
+
+        <nav aria-label="Primary navigation">
+          <ul class="nav-links" id="navLinks">
+            <li><a href="index.html" aria-current="page">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-controls">
+          <div class="theme-switcher" role="group" aria-label="Color theme mode">
+            <button type="button" class="theme-switcher__btn" data-theme-btn="light">Light</button>
+            <button type="button" class="theme-switcher__btn" data-theme-btn="dark">Dark</button>
+            <button type="button" class="theme-switcher__btn" data-theme-btn="auto">Auto</button>
+          </div>
+          <button type="button" class="sound-toggle" id="soundToggle" aria-pressed="false">Sound: Off</button>
+          <button type="button" class="nav-toggle" id="navToggle" aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation menu">
+            <span class="nav-toggle__bars"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" class="site-main">
+      <section class="hero">
+        <div class="container hero__content reveal is-visible">
+          <span class="eyebrow">Blooms Flame Wax · BFW</span>
+          <h1 class="hero__title">Light Up Your Moments With <em>Living Botanical Perfume</em>.</h1>
+          <p class="section-lead">
+            Small-batch soy and beeswax candles organized by fine perfume family—floating above warm
+            molten candlelight for serene everyday rituals.
+          </p>
+          <div class="hero__actions">
+            <a href="#showcase" class="btn btn--primary" data-smooth-scroll>Shop Now &darr;</a>
+            <a href="shop.html" class="btn btn--ghost">Explore By Perfume</a>
+          </div>
+          <p class="hero__scroll-hint">Scroll over the live flame</p>
+        </div>
+      </section>
+
+      <section class="section" id="showcase">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="section-header__copy">
+              <span class="eyebrow">Signature Showcase</span>
+              <h2 class="section-title">Featured Candle Editions</h2>
+              <p class="section-lead">Inspect full top, heart, and base perfume pyramids on any edition below.</p>
+            </div>
+            <a href="shop.html" class="btn btn--ghost">View All 6 Editions &rarr;</a>
+          </div>
+          <div class="product-grid" id="homeFeaturedGrid"></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="section-header__copy">
+              <span class="eyebrow">Olfactory Architecture</span>
+              <h2 class="section-title">Browse Split by Perfume Family</h2>
+            </div>
+          </div>
+          <div class="pillars-grid" id="homePerfumeFamilies"></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="glass-panel cta-banner reveal">
+            <div class="cta-banner__copy">
+              <span class="eyebrow">Direct Studio Inquiries</span>
+              <h2 class="section-title">Interested in a Signature Edition or Custom Batch?</h2>
+              <p class="section-lead">Reach out directly—no account, cart, or checkout required.</p>
+            </div>
+            <a href="contact.html" class="btn btn--primary">Send an Inquiry &rarr;</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <a href="index.html" class="brand-link">
+          <img src="assets/icons/flame-mark.svg" alt="" width="24" height="24" />
+          <span>Blooms Flame Wax · BFW</span>
+        </a>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="footer-copy">
+          <span>&copy; <span id="currentYear"></span> Blooms Flame Wax — Light Up Your Moments.</span>
+          <span>[Your Studio City &amp; Address Placeholder]</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <div class="modal-backdrop" id="scentModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal-dialog">
+      <button type="button" class="modal-close" id="modalClose" aria-label="Close perfume notes">&times;</button>
+      <img id="modalImg" class="modal-dialog__img" src="" alt="" />
+      <div class="modal-dialog__body">
+        <span class="eyebrow" id="modalCategory"></span>
+        <h2 class="section-title" id="modalTitle" style="font-size: 2rem;"></h2>
+        <p class="candle-card__notes" id="modalDesc"></p>
+        <ul class="notes-list">
+          <li><strong>Top Perfume Notes:</strong> <span id="modalTop"></span></li>
+          <li><strong>Heart Perfume Notes:</strong> <span id="modalHeart"></span></li>
+          <li><strong>Base Perfume Notes:</strong> <span id="modalBase"></span></li>
+          <li><strong>Vessel &amp; Burn:</strong> <span id="modalBurn"></span></li>
+        </ul>
+        <a id="modalInquireLink" href="contact.html" class="btn btn--primary">Inquire About This Candle &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="data/products.js" defer></script>
+  <script src="js/catalog.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

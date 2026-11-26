@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-pref="auto">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="About Blooms Flame Wax (BFW) — Botanical perfume blending and small-batch soy-beeswax pouring craft." />
+  <title>About Our Craft | Blooms Flame Wax · BFW</title>
+
+  <script src="js/theme.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <div class="bg-video-stage" aria-hidden="true">
+    <video id="bgCandleVideo" class="bg-video-stage__video" autoplay muted loop playsinline preload="auto" poster="assets/images/hero-video-fallback.jpg">
+      <source src="assets/videos/candle-bg.mp4" type="video/mp4" />
+    </video>
+    <div class="bg-video-stage__overlay"></div>
+    <div class="bg-video-stage__glow"></div>
+    <canvas id="emberParticles" class="bg-video-stage__particles"></canvas>
+  </div>
+
+  <div class="site-shell">
+    <header class="site-header" id="siteHeader">
+      <div class="container nav-bar">
+        <a href="index.html" class="brand-link" aria-label="Blooms Flame Wax Home">
+          <img src="assets/icons/flame-mark.svg" alt="" width="28" height="28" />
+          <span>Blooms Flame Wax<small class="brand-sub">BFW · Light Up Your Moments</small></span>
+        </a>
+
+        <nav aria-label="Primary navigation">
+          <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="about.html" aria-current="page">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-controls">
+          <div class="theme-switcher" role="group" aria-label="Color theme mode">
+            <button type="button" class="theme-switcher__btn" data-theme-btn="light">Light</button>
+            <button type="button" class="theme-switcher__btn" data-theme-btn="dark">Dark</button>
+            <button type="button" class="theme-switcher__btn" data-theme-btn="auto">Auto</button>
+          </div>
+          <button type="button" class="sound-toggle" id="soundToggle" aria-pressed="false">Sound: Off</button>
+          <button type="button" class="nav-toggle" id="navToggle" aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation menu">
+            <span class="nav-toggle__bars"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" class="site-main">
+      <section class="page-hero">
+        <div class="container page-hero__inner reveal is-visible">
+          <span class="eyebrow">Our Story &amp; Studio Philosophy</span>
+          <h1 class="section-title">Crafted Slowly Around Warmth, Perfume, and Stillness.</h1>
+          <p class="section-lead">
+            Blooms Flame Wax (BFW) pairs natural plant soy and beeswax with fine botanical fragrance
+            architecture—hand-poured in small batches to light up quiet moments.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" style="padding-top: 1.5rem;">
+        <div class="container">
+          <div class="process-grid">
+            <article class="glass-panel feature-card reveal" data-delay="1">
+              <span class="eyebrow">Step 01</span>
+              <h2 class="feature-card__title">Perfume Blending</h2>
+              <p class="feature-card__text">Botanical oils and natural resins are balanced across top, heart, and base notes.</p>
+            </article>
+            <article class="glass-panel feature-card reveal" data-delay="2">
+              <span class="eyebrow">Step 02</span>
+              <h2 class="feature-card__title">Gentle Wax Melt</h2>
+              <p class="feature-card__text">100% soy and filtered beeswax melt slowly at controlled temperatures for clean combustion.</p>
+            </article>
+            <article class="glass-panel feature-card reveal" data-delay="3">
+              <span class="eyebrow">Step 03</span>
+              <h2 class="feature-card__title">Hand-Poured Vessels</h2>
+              <p class="feature-card__text">Unbleached cotton wicks are centered by hand inside smoked glass and ceramic jars.</p>
+            </article>
+            <article class="glass-panel feature-card reveal" data-delay="3">
+              <span class="eyebrow">Step 04</span>
+              <h2 class="feature-card__title">14-Day Cure</h2>
+              <p class="feature-card__text">Every batch rests in dark studio trays so perfume binds deeply throughout the wax.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="glass-panel cta-banner reveal">
+            <div class="cta-banner__copy">
+              <span class="eyebrow">Explore Or Collaborate</span>
+              <h2 class="section-title">Discover Our Four Perfume Families</h2>
+              <p class="section-lead">Browse our curated fragrance archive or send a direct inquiry to the studio.</p>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:0.85rem;">
+              <a href="shop.html" class="btn btn--ghost">Explore Perfumes</a>
+              <a href="contact.html" class="btn btn--primary">Contact Us &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <a href="index.html" class="brand-link">
+          <img src="assets/icons/flame-mark.svg" alt="" width="24" height="24" />
+          <span>Blooms Flame Wax · BFW</span>
+        </a>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="footer-copy">
+          <span>&copy; <span id="currentYear"></span> Blooms Flame Wax — Light Up Your Moments.</span>
+          <span>[Your Studio City &amp; Address Placeholder]</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
