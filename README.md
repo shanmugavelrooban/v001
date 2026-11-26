@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Blooms & Flame Wax — Candle Showcase Website (v1.0.0)
 
 A complete, responsive, vanilla **HTML5 / CSS3 / JavaScript** candle showcase website and **JWS-secured Studio Admin Panel** backed by **Google Sheets + Google Apps Script + Gmail** (no third-party API keys or paid databases required).
@@ -116,3 +117,6 @@ It verifies:
 - **JWS / JWT (RFC 7515 HS256)**: valid signature verification, tamper rejection, `alg: "none"` rejection, expired token rejection, and `TOKEN_VERSION` session revocation.
 - **Spreadsheet Formula Injection Protection**: prefixes `=`, `+`, `-`, `@`, `\t`, `\r`, and full-width variants (`＝`, `＋`, `－`, `＠`) with `'`.
 - **HTML / XSS & Email Header Injection Protection**: neutralises `<script>`, `<svg onload>`, event attributes, `javascript:` / `data:` URLs, and `\r\n` (`BCC:`) header injection.
+=======
+# v001
+>>>>>>> 3d2f8abfd033afb806f3edcf24a8b850d9f177be
