@@ -171,14 +171,30 @@
     return sendViaContactProcess(url, payload, CFG.REQUEST_TIMEOUT_MS);
   }
 
+  function hasAdminCredentialsSet() {
+    var customId = (localStorage.getItem(ADMIN_ID_KEY) || "").trim();
+    var customPwd = (localStorage.getItem(ADMIN_PWD_KEY) || "").trim();
+    return Boolean(customId && customPwd);
+  }
+
   function isValidAdminId(inputId) {
     var clean = String(inputId || "").trim().toLowerCase();
     if (!clean) return false;
     var customId = (localStorage.getItem(ADMIN_ID_KEY) || "").trim().toLowerCase();
-    if (customId && clean === customId) return true;
-    if (DEFAULT_ADMIN_IDS.indexOf(clean) !== -1) return true;
-    // On Vercel or a new browser session, accept any valid email format or admin username (3+ chars)
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(clean) || /^[a-z0-9._\-]{3,60}$/.test(clean);
+    if (customId) {
+      return clean === customId;
+    }
+    return DEFAULT_ADMIN_IDS.indexOf(clean) !== -1;
+  }
+
+  function isValidAdminPassword(inputPwd) {
+    var pwd = String(inputPwd || "").trim();
+    if (!pwd) return false;
+    var customPwd = (localStorage.getItem(ADMIN_PWD_KEY) || "").trim();
+    if (customPwd) {
+      return pwd === customPwd;
+    }
+    return pwd === DEFAULT_ADMIN_PWD;
   }
 
   function getActiveAdminId() {
@@ -426,7 +442,7 @@
       });
     }
 
-    /* ---------- Sign In (Admin ID + Password -> JWS HS256 Session, Vercel-Ready) ---------- */
+    /* ---------- Sign In (Strict Verification: Email/Name & Password Must Match Exactly) ---------- */
     loginForm.addEventListener("submit", function (e) {
       e.preventDefault();
       liveApi = refreshApiStatus();
@@ -434,38 +450,29 @@
       var enteredId = (adminIdInput ? adminIdInput.value : "").trim();
       var pwd = (adminPwdInput ? adminPwdInput.value : "").trim();
 
-      if (!isValidAdminId(enteredId)) {
-        showStatus("error", "Please enter a valid Admin Email or ID.");
+      if (!enteredId) {
+        showStatus("error", "Please enter your Admin Email or Name.");
         if (adminIdInput) adminIdInput.focus();
         return;
       }
 
-      if (!pwd || pwd.length < 4) {
+      if (!pwd) {
         showStatus("error", "Please enter your Admin Password.");
         if (adminPwdInput) adminPwdInput.focus();
         return;
       }
 
-      var customPwd = localStorage.getItem(ADMIN_PWD_KEY);
-      // If a custom password was set on this browser, accept it OR master recovery password;
-      // If on a fresh Vercel browser deployment, accept the entered password and persist it.
-      if (customPwd && pwd !== customPwd && pwd !== DEFAULT_ADMIN_PWD) {
-        showStatus("error", "Invalid Admin Password. Click 'Forgot Password?' to send it to your Admin Gmail.");
-        if (adminPwdInput) adminPwdInput.focus();
+      var idMatched = isValidAdminId(enteredId);
+      var pwdMatched = isValidAdminPassword(pwd);
+
+      if (!idMatched || !pwdMatched) {
+        showStatus("error", "Invalid Admin Email/Name or Password. Credentials do not match.");
+        if (!idMatched && adminIdInput) adminIdInput.focus();
+        else if (adminPwdInput) adminPwdInput.focus();
         return;
       }
 
-      // Sync entered Admin Email ID & Password so Vercel session stays updated
-      try {
-        localStorage.setItem(ADMIN_ID_KEY, enteredId);
-        if (!customPwd) localStorage.setItem(ADMIN_PWD_KEY, pwd);
-      } catch (err0) { /* ignore */ }
-
-      if (rememberChk && rememberChk.checked) {
-        try { localStorage.setItem(REMEMBER_ID_KEY, enteredId); } catch (err) { /* ignore */ }
-      } else {
-        try { localStorage.removeItem(REMEMBER_ID_KEY); } catch (err2) { /* ignore */ }
-      }
+      try { localStorage.removeItem(REMEMBER_ID_KEY); } catch (err2) { /* ignore */ }
 
       var now = Math.floor(Date.now() / 1000);
       signLocalJws({
@@ -502,7 +509,7 @@
       tab.addEventListener("click", function () {
         var target = tab.getAttribute("data-tab");
         tabs.forEach(function (t) { t.setAttribute("aria-selected", String(t === tab)); });
-        ["products", "images", "submissions", "security"].forEach(function (name) {
+        ["products", "submissions", "security"].forEach(function (name) {
           var el = document.getElementById("tab-" + name);
           if (el) el.classList.toggle("is-active", name === target);
         });
@@ -588,94 +595,7 @@
       // Start fresh (0 fake rows — only real WhatsApp & Contact requirement notifications)
       state.submissions = loadLocalSubmissions();
       renderProducts();
-      renderSiteImagesControl();
       renderSubmissions();
-    }
-
-    /* ---------- Website Section Images Control (Logo, Home Categories, About Story Images) ---------- */
-    var siteImagesGrid = document.getElementById("site-images-grid");
-    var resetSiteImagesBtn = document.getElementById("reset-site-images-btn");
-
-    function loadSiteImagesMap() {
-      try { return JSON.parse(localStorage.getItem(SITE_IMAGES_KEY) || "{}") || {}; } catch (e) { return {}; }
-    }
-    function saveSiteImagesMap(map) {
-      try {
-        localStorage.setItem(SITE_IMAGES_KEY, JSON.stringify(map));
-        if (window.BFW_SITE_IMAGES && typeof window.BFW_SITE_IMAGES.apply === "function") {
-          window.BFW_SITE_IMAGES.apply();
-        }
-      } catch (e) { /* ignore */ }
-    }
-
-    function renderSiteImagesControl() {
-      if (!siteImagesGrid) return;
-      var map = loadSiteImagesMap();
-      var cards = SITE_IMAGE_SLOTS.map(function (slot) {
-        var curSrc = SEC.safeImageSrc(map[slot.key] || slot.def);
-        var fileInp = SEC.el("input", { type: "file", accept: "image/*" });
-        fileInp.hidden = true;
-        fileInp.addEventListener("change", function () {
-          var f = fileInp.files && fileInp.files[0];
-          if (!f) return;
-          fileToDataUrl(f).then(function (dataUrl) {
-            var nextMap = loadSiteImagesMap();
-            nextMap[slot.key] = dataUrl;
-            saveSiteImagesMap(nextMap);
-            renderSiteImagesControl();
-            toast("Updated website image: " + slot.title);
-          });
-        });
-
-        var pathInp = SEC.el("input", {
-          type: "text",
-          list: "studio-images",
-          value: (map[slot.key] && map[slot.key].indexOf("data:") === 0) ? "Custom uploaded image" : (map[slot.key] || slot.def),
-          placeholder: slot.def
-        });
-        pathInp.addEventListener("change", function () {
-          var val = pathInp.value.trim();
-          if (!val || val === "Custom uploaded image") return;
-          var nextMap = loadSiteImagesMap();
-          nextMap[slot.key] = SEC.safeImageSrc(val);
-          saveSiteImagesMap(nextMap);
-          renderSiteImagesControl();
-          toast("Updated image path for: " + slot.title);
-        });
-
-        var chooseLabel = SEC.el("label", { class: "btn btn--primary btn--small img-upload-btn", text: "Change Image" }, [fileInp]);
-        var resetBtn = SEC.el("button", {
-          type: "button",
-          class: "btn btn--ghost btn--small",
-          text: "Default",
-          onclick: function () {
-            var nextMap = loadSiteImagesMap();
-            delete nextMap[slot.key];
-            saveSiteImagesMap(nextMap);
-            renderSiteImagesControl();
-            toast("Reset to default: " + slot.title);
-          }
-        });
-
-        return SEC.el("div", { class: "site-img-card" }, [
-          SEC.el("strong", { text: slot.title }),
-          SEC.el("div", { class: "site-img-card__preview" }, [SEC.el("img", { src: curSrc, alt: slot.title })]),
-          pathInp,
-          SEC.el("div", { class: "panel-actions" }, [chooseLabel, resetBtn])
-        ]);
-      });
-      siteImagesGrid.replaceChildren.apply(siteImagesGrid, cards);
-    }
-
-    if (resetSiteImagesBtn) {
-      resetSiteImagesBtn.addEventListener("click", function () {
-        localStorage.removeItem(SITE_IMAGES_KEY);
-        if (window.BFW_SITE_IMAGES && typeof window.BFW_SITE_IMAGES.apply === "function") {
-          window.BFW_SITE_IMAGES.apply();
-        }
-        renderSiteImagesControl();
-        toast("All website section images reset to default.");
-      });
     }
 
     /* ---------- Render Products (1–3 Images + Editable Offer + Custom Category) ---------- */
@@ -995,33 +915,34 @@
         state.submissions.map(function (s) { return [s.id, s.submittedAt, s.name, s.email, s.phone, s.product, s.status, s.message]; }));
     });
 
-    /* ---------- Admin ID & Password Change Tab: Updates Email ID & Password Immediately on Vercel & Local ---------- */
+    /* ---------- Admin ID & Password Change Tab: Only Name & Password Shown -> Requires Authentication Approval Next Time ---------- */
     document.getElementById("password-form").addEventListener("submit", function (e) {
       e.preventDefault();
       var form = e.currentTarget;
-      var cur = (form.currentPassword.value || "").trim();
-      var nextPwd = (form.newPassword.value || "").trim();
-      var nextId = (form.newAdminId ? form.newAdminId.value : "").trim() || getActiveAdminId();
+      var nextId = (form.newAdminId ? form.newAdminId.value : "").trim();
+      var nextPwd = (form.newPassword ? form.newPassword.value : "").trim();
       var activePwd = getActiveAdminPassword();
 
-      if (!nextId || nextId.length < 3) {
-        showBoxStatus(pwdChangeStatus, "error", "Please enter a valid Admin ID / Email.");
+      if (!nextId || nextId.length < 2) {
+        showBoxStatus(pwdChangeStatus, "error", "Please enter an Admin Name.");
+        if (form.newAdminId) form.newAdminId.focus();
         return;
       }
-      if (!nextPwd || nextPwd.length < 6) {
-        showBoxStatus(pwdChangeStatus, "error", "New password must be at least 6 characters.");
+      if (!nextPwd || nextPwd.length < 4) {
+        showBoxStatus(pwdChangeStatus, "error", "Please enter a Password (at least 4 characters).");
+        if (form.newPassword) form.newPassword.focus();
         return;
       }
 
-      // Save previous and new updated Admin Email ID & Password
-      localStorage.setItem(PREV_PWD_KEY, cur || activePwd);
+      // Save Admin Name & Password so every future visit requires authentication approval with this exact Name & Password
+      localStorage.setItem(PREV_PWD_KEY, activePwd);
       localStorage.setItem(ADMIN_ID_KEY, nextId);
       localStorage.setItem(ADMIN_PWD_KEY, nextPwd);
-      localStorage.setItem(REMEMBER_ID_KEY, nextId);
+      localStorage.removeItem(REMEMBER_ID_KEY);
       form.reset();
 
-      showBoxStatus(pwdChangeStatus, "success", "Admin Email ID & Password updated successfully!");
-      toast("Admin Email ID & Password updated.");
+      showBoxStatus(pwdChangeStatus, "success", "Name & Password saved! Authentication approval with Name \"" + nextId + "\" and your Password is now enabled whenever you open the Admin Panel.");
+      toast("Admin Name & Password set for authentication.");
     });
 
     /* ---------- Task 3: Auto-Stop Side Video When Screen Size Decreases & Play When Increased ---------- */
@@ -1040,8 +961,33 @@
       mqSmall.addEventListener("change", syncSideVideoByScreenSize);
     }
     window.addEventListener("resize", syncSideVideoByScreenSize, { passive: true });
-    syncSideVideoByScreenSize();
 
-    if (decodeJwsClaims(state.token)) showDashboard();
+    // Task 1: First time opening admin.html (before Name & Password are set) opens Admin Panel directly.
+    // After Admin sets Name & Password in "Admin ID & Password Change", every time admin.html is opened it requires Sign-In authentication approval.
+    if (decodeJwsClaims(state.token)) {
+      showDashboard();
+    } else if (!hasAdminCredentialsSet()) {
+      var nowInit = Math.floor(Date.now() / 1000);
+      signLocalJws({
+        iss: "bfw-apps-script",
+        aud: "bfw-admin",
+        sub: "first-time-admin",
+        role: "admin",
+        iat: nowInit,
+        nbf: nowInit,
+        exp: nowInit + 7200,
+        ver: 1
+      }).then(function (tok) {
+        setToken(tok);
+        showDashboard();
+        // Automatically switch to the "Admin ID & Password Change" tab so Admin can set Name & Password
+        var secTab = document.querySelector('.admin-tab[data-tab="security"]');
+        if (secTab) secTab.click();
+        toast("First-time setup: Set your Admin Name & Password to enable Sign-In authentication.");
+      });
+    } else {
+      showLogin();
+    }
+    syncSideVideoByScreenSize();
   });
 })();

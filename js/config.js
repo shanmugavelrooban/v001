@@ -14,7 +14,7 @@
   // Example: "https://script.google.com/macros/s/AKfycbx.../exec"
   // =========================================================================
   var CONFIG_DATA = {
-    APPS_SCRIPT_WEB_APP_URL: "https://script.google.com/macros/s/AKfycbw27wj_rQuP4n4WSeb48MjzVCpoZKsYuN56ACGDUdNdijJXACbdq_N3pMMclNq_lIrv/exec",
+    APPS_SCRIPT_WEB_APP_URL: "",
     VERSION: "1.1.0",
     WHATSAPP_NUMBER: "917871326620",
     REQUEST_TIMEOUT_MS: 15000,

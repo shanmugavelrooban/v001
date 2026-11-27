@@ -11,16 +11,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Jost:wght@400;500;600&amp;display=swap">
-  <link rel="stylesheet" href="css/style.css?v=24">
-  <link rel="stylesheet" href="css/animations.css?v=24">
-  <link rel="stylesheet" href="css/responsive.css?v=24">
-  <link rel="stylesheet" href="css/admin.css?v=24">
-  <script src="js/config.js?v=24"></script>
-  <script src="js/security.js?v=24" defer></script>
-  <script src="js/products-data.js?v=24" defer></script>
-  <script src="js/i18n.js?v=24" defer></script>
-  <script src="js/layout.js?v=24" defer></script>
-  <script src="js/admin.js?v=24" defer></script>
+  <link rel="stylesheet" href="css/style.css?v=27">
+  <link rel="stylesheet" href="css/animations.css?v=27">
+  <link rel="stylesheet" href="css/responsive.css?v=27">
+  <link rel="stylesheet" href="css/admin.css?v=27">
+  <script src="js/config.js?v=27"></script>
+  <script src="js/security.js?v=27" defer></script>
+  <script src="js/products-data.js?v=27" defer></script>
+  <script src="js/i18n.js?v=27" defer></script>
+  <script src="js/layout.js?v=27" defer></script>
+  <script src="js/admin.js?v=27" defer></script>
 </head>
 <body class="admin-body">
   <main class="admin-main">
@@ -60,10 +60,10 @@
 
           <form class="form auth-form" id="login-form" novalidate autocomplete="off">
             <div class="field">
-              <label class="visually-hidden" for="admin-id">Admin ID or Email</label>
+              <label class="visually-hidden" for="admin-id">Admin Name, ID or Email</label>
               <div class="input-icon-wrap">
                 <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-                <input id="admin-id" name="adminId" type="email" required maxlength="120" autocomplete="off" placeholder="Enter your email">
+                <input id="admin-id" name="adminId" type="text" required maxlength="120" autocomplete="off" placeholder="Enter Admin Email or Name">
               </div>
             </div>
 
@@ -78,11 +78,7 @@
               </div>
             </div>
 
-            <div class="auth-meta-row">
-              <label class="auth-remember">
-                <input id="remember-admin" name="remember" type="checkbox" checked>
-                <span>Remember Me</span>
-              </label>
+            <div class="auth-meta-row auth-meta-row--end">
               <button class="auth-forgot-btn" id="forgot-pwd-btn" type="button">Forgot Password?</button>
             </div>
 
@@ -131,10 +127,9 @@
         </div>
       </div>
 
-      <!-- Admin Tabs: Products, Website Images, Requirement Notifications, Admin ID & Password Change -->
+      <!-- Admin Tabs: Products, Requirement Notifications, Admin ID & Password Change -->
       <div class="admin-tabs" role="tablist" aria-label="Admin sections">
         <button class="admin-tab" type="button" role="tab" data-tab="products" aria-selected="true">Products &amp; Images</button>
-        <button class="admin-tab" type="button" role="tab" data-tab="images" aria-selected="false">Website Section Images</button>
         <button class="admin-tab" type="button" role="tab" data-tab="submissions" aria-selected="false">
           <span>Requirement Notifications</span>
           <span class="notif-badge" id="tab-notif-badge" hidden>0</span>
@@ -271,20 +266,6 @@
         </div>
       </section>
 
-      <!-- TAB 1B: WEBSITE SECTION IMAGES (Logo, Home Category Tiles, About Page Story Images) -->
-      <section class="admin-panel" id="tab-images" role="tabpanel">
-        <div class="panel-bar">
-          <div>
-            <h2>Website Section Images Control</h2>
-            <p class="privacy-note">Change the Brand Logo, Home Page Category Images, and About Page Story Images directly from here.</p>
-          </div>
-          <div class="panel-actions">
-            <button class="btn btn--ghost btn--small" id="reset-site-images-btn" type="button">Reset All Website Images to Default</button>
-          </div>
-        </div>
-        <div class="site-images-grid" id="site-images-grid"></div>
-      </section>
-
       <!-- TAB 2: SUBMISSIONS / WHATSAPP REQUIREMENT NOTIFICATIONS -->
       <section class="admin-panel" id="tab-submissions" role="tabpanel">
         <div class="panel-bar">
@@ -316,26 +297,22 @@
         </div>
       </section>
 
-      <!-- TAB 3: ONLY ADMIN ID & PASSWORD CHANGE -->
+      <!-- TAB 3: ONLY ADMIN NAME & PASSWORD SET / CHANGE -->
       <section class="admin-panel" id="tab-security" role="tabpanel">
         <div class="card admin-pwd-card">
           <h3>Admin ID &amp; Password Change</h3>
-          <p class="section__lead">Update your Admin Email ID and Password below.</p>
+          <p class="section__lead">Set your Admin Name and Password below. After setting your Name and Password, authentication approval is required every time to open the Admin Panel.</p>
           <form class="form" id="password-form" novalidate autocomplete="off">
             <div class="field">
-              <label for="new-admin-id">Admin ID / Email <span class="req">*</span></label>
-              <input id="new-admin-id" name="newAdminId" type="email" required placeholder="Enter new admin email">
+              <label for="new-admin-id">Admin Name <span class="req">*</span></label>
+              <input id="new-admin-id" name="newAdminId" type="text" required maxlength="120" placeholder="Enter Admin Name">
             </div>
             <div class="field">
-              <label for="cur-password">Current Password <span class="req">*</span></label>
-              <input id="cur-password" name="currentPassword" type="password" required autocomplete="off" placeholder="Enter current password">
-            </div>
-            <div class="field">
-              <label for="new-password">New Password (min 10 chars) <span class="req">*</span></label>
-              <input id="new-password" name="newPassword" type="password" required minlength="10" autocomplete="new-password" placeholder="Enter new password (10+ chars)">
+              <label for="new-password">Password <span class="req">*</span></label>
+              <input id="new-password" name="newPassword" type="password" required minlength="4" autocomplete="new-password" placeholder="Enter Password">
             </div>
             <div class="panel-actions">
-              <button class="btn btn--primary btn--small" type="submit">Update Admin ID &amp; Password</button>
+              <button class="btn btn--primary btn--small" type="submit">Set Name &amp; Password</button>
             </div>
             <div class="form-status" id="pwd-change-status" role="status" aria-live="polite"></div>
           </form>
