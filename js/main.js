@@ -124,11 +124,11 @@
         var a = 0.48 + Math.sin(p.life * 2) * 0.28;
         var rgb;
         if (light) {
-          // Light mode: crisp monochrome charcoal/black + rich amber & rose-gold so particles are clearly visible
-          rgb = p.kind === "mono" ? "24,18,22" : (p.kind === "gold" ? "188,108,28" : "150,52,84");
+          // Light mode: crisp monochrome black / charcoal / slate particles
+          rgb = p.kind === "mono" ? "10,10,12" : (p.kind === "gold" ? "45,45,50" : "90,90,98");
         } else {
-          // Dark mode: crisp monochrome silver/white + glowing gold & ember
-          rgb = p.kind === "mono" ? "255,255,255" : (p.kind === "gold" ? "245,196,115" : "235,125,65");
+          // Dark mode: crisp monochrome pure white / silver / platinum particles
+          rgb = p.kind === "mono" ? "255,255,255" : (p.kind === "gold" ? "220,220,226" : "180,180,188");
         }
 
         var g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4.5);
@@ -199,7 +199,7 @@
     var id = SEC.cleanText(p.id, 60).toLowerCase() || SEC.cleanText(p.name, 60).toLowerCase().replace(/[^a-z0-9]+/g, "-");
     if (!/^[a-z0-9][a-z0-9\-]{0,59}$/.test(id)) return null;
     var fixExt = function (u) {
-      return String(u || "").replace(/^(assets\/images\/products\/[a-z0-9\-]+)\.jpe?g$/i, "$1.png");
+      return String(u || "").replace(/^(assets\/images\/products\/[a-z0-9\-]+)\.png$/i, "$1.jpg");
     };
     var img1 = SEC.safeImageSrc(fixExt(p.image));
     var img2 = p.image2 ? SEC.safeImageSrc(fixExt(p.image2)) : "";
@@ -241,16 +241,17 @@
   }
 
   function enquiryHref(p) {
-    var waNum = (window.BFW_CONFIG && window.BFW_CONFIG.WHATSAPP_NUMBER) || "917871326620";
-    var text = "Hello Blooms & Flame Wax! I have a requirement for the candle: " + p.name;
-    return "https://wa.me/" + waNum + "?text=" + encodeURIComponent(text);
+    return "contact.html?product=" + encodeURIComponent(p && p.name ? p.name : "Candle Enquiry");
   }
 
   /** Builds a product card using safe DOM APIs only (supports 1–3 images + editable offer badge). */
   function productCard(p, index, onQuickView) {
     var el = SEC.el;
+    var t = function (key, fallback) {
+      return (window.BFW_I18N && typeof window.BFW_I18N.t === "function") ? window.BFW_I18N.t(key) : fallback;
+    };
     var images = [p.image, p.image2, p.image3].filter(Boolean);
-    var img = el("img", { src: images[0], alt: p.name + " — handmade candle", loading: "lazy", decoding: "async", width: "400", height: "500" });
+    var img = el("img", { src: images[0], alt: p.name + " — handmade candle", loading: "lazy", decoding: "async", width: "400", height: "480" });
     img.addEventListener("error", function () { if (img.getAttribute("src") !== SEC.PLACEHOLDER) img.setAttribute("src", SEC.PLACEHOLDER); }, { once: true });
 
     var thumbsBar = null;
@@ -271,23 +272,39 @@
       thumbsBar = el("div", { class: "product-card__thumbs" }, thumbBtns);
     }
 
-    var action = onQuickView
-      ? el("button", { type: "button", class: "product-card__link", text: "Quick view", "aria-label": "Quick view: " + p.name, onclick: function () { onQuickView(p); } })
-      : el("a", { class: "product-card__link", href: enquiryHref(p), target: "_blank", rel: "noopener noreferrer", text: "WhatsApp Chat", "aria-label": "Chat on WhatsApp about " + p.name });
+    // Clicking the product button redirects to Contact page (with product pre-filled)
+    var action = el("a", {
+      class: "product-card__link",
+      href: enquiryHref(p),
+      "data-notify-product": p.name,
+      "data-notify-req": "Product Enquiry (" + p.name + ")",
+      text: t("btn_enquire_contact", "Contact"),
+      "aria-label": "Contact about " + p.name
+    });
+
+    var mediaBox = el("div", { class: "product-card__media" }, [
+      img,
+      p.badge ? el("span", { class: "product-card__badge", text: p.badge }) : null,
+      p.offer ? el("span", { class: "product-card__offer", text: p.offer }) : null,
+      thumbsBar
+    ]);
+    if (typeof onQuickView === "function") {
+      mediaBox.style.cursor = "pointer";
+      mediaBox.setAttribute("title", t("btn_quick_view", "Quick view") + ": " + p.name);
+      mediaBox.addEventListener("click", function (ev) {
+        if (ev.target.closest(".product-card__thumb")) return;
+        onQuickView(p);
+      });
+    }
 
     var card = el("article", { class: "product-card", "data-reveal": "up", "data-category": p.category }, [
-      el("div", { class: "product-card__media" }, [
-        img,
-        p.badge ? el("span", { class: "product-card__badge", text: p.badge }) : null,
-        p.offer ? el("span", { class: "product-card__offer", text: p.offer }) : null,
-        thumbsBar
-      ]),
+      mediaBox,
       el("div", { class: "product-card__body" }, [
         el("span", { class: "product-card__cat", text: p.categoryLabel || CATS[p.category] || p.category }),
         el("h3", { class: "product-card__name", text: p.name }),
         el("p", { class: "product-card__desc", text: p.description }),
         el("div", { class: "product-card__foot" }, [
-          el("span", { class: "product-card__price", text: p.price || "Price on request" }),
+          el("span", { class: "product-card__price", text: p.price || t("price_on_request", "Price on request") }),
           action
         ])
       ])
@@ -310,6 +327,9 @@
 
   window.addEventListener("storage", function (e) {
     if (e.key === "bfw_admin_products") initFeatured();
+  });
+  window.addEventListener("bfw:langchange", function () {
+    initFeatured();
   });
 
   window.BFW = { loadProducts: loadProducts, productCard: productCard, observeReveal: observeReveal, enquiryHref: enquiryHref, sanitizeProduct: sanitizeProduct };

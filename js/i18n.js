@@ -1,0 +1,336 @@
+/* =========================================================
+   Blooms & Flame Wax — Indian Regional Languages Engine (i18n.js)
+   Task 5 (Suggested by Moorthi Sir AKR for Indian Customers):
+   Supports English (en), Tamil (ta - தமிழ்), Hindi (hi - हिन्दी),
+   Telugu (te - తెలుగు), Malayalam (ml - മലയാളം), Kannada (kn - ಕನ್ನಡ)
+   ========================================================= */
+(function () {
+  "use strict";
+  var LANG_KEY = "bfw_lang_v1";
+
+  var LANGUAGES = [
+    { code: "en", label: "English", short: "EN" },
+    { code: "ta", label: "தமிழ் (Tamil)", short: "தமிழ்" },
+    { code: "hi", label: "हिन्दी (Hindi)", short: "हिन्दी" },
+    { code: "te", label: "తెలుగు (Telugu)", short: "తెలుగు" },
+    { code: "ml", label: "മലയാളം (Malayalam)", short: "മലയാളം" },
+    { code: "kn", label: "ಕನ್ನಡ (Kannada)", short: "ಕನ್ನಡ" }
+  ];
+
+  var DICT = {
+    en: {
+      nav_home: "Home",
+      nav_shop: "Shop",
+      nav_about: "About",
+      nav_contact: "Contact",
+      hero_eyebrow: "Hand-poured in Kattangudi, Tamil Nadu · Since 1999",
+      hero_title_1: "Light up",
+      hero_title_2: "your moments",
+      hero_text: "Sculpted roses, tender tulips, playful bubble cubes and festive terracotta diyas — every Blooms & Flame Wax candle is poured slowly by hand in our Kattangudi workshop, so it glows like a memory and gifts like a keepsake.",
+      hero_note: "✔ 100% Real Handmade Photos · Handcrafted Soy & Artisanal Wax · Direct Handmade Support: +91 78713 26620",
+      btn_shop_now: "Contact",
+      btn_our_story: "Our story",
+      trust_1_title: "Est. 1999 in Tamil Nadu",
+      trust_1_desc: "25+ years of authentic candle-making in Kattangudi, Virudhunagar",
+      trust_2_title: "100% Real Handmade Photos",
+      trust_2_desc: "Every candle shown is photographed at our own workshop — zero stock images",
+      trust_3_title: "Wedding & Return Gifts",
+      trust_3_desc: "Custom colours, fragrances & bulk packaging for Indian weddings and festivals",
+      trust_4_title: "Direct Maker Support",
+      trust_4_desc: "Talk directly with our handmade team at +91 78713 26620 (Tue–Sat)",
+      featured_eyebrow: "The collection",
+      featured_title: "Featured handmade candles",
+      featured_lead: "Real handmade candles from our Kattangudi workshop. Click “Contact” on any candle to send us your requirement.",
+      btn_view_all: "View full collection",
+      btn_enquire_contact: "Contact",
+      price_on_request: "Price on request",
+      cat_eyebrow: "Shop by mood",
+      cat_title: "Four ways to glow",
+      cat_floral: "Floral Blooms",
+      cat_floral_sub: "Roses, tulips, lotus & daisies",
+      cat_love: "Love & Gifting",
+      cat_love_sub: "Keepsakes for weddings & anniversaries",
+      cat_sculpted: "Sculpted Bubbles",
+      cat_sculpted_sub: "Modern shapes, playful colour",
+      cat_festive: "Festive Diyas",
+      cat_festive_sub: "Terracotta diyas, gift boxed",
+      craft_eyebrow: "Slow-made in Kattangudi",
+      craft_title: "From melt to glow",
+      cta_eyebrow: "Weddings · Return gifts · Deepavali & Festivals",
+      cta_title: "Looking for a custom candle gift?",
+      cta_text: "Tell us the occasion, colours and quantity — our Kattangudi handmade team will reply with ideas and availability.",
+      btn_message_email: "Message Email",
+      shop_eyebrow: "Authentic Handmade Catalogue",
+      shop_title: "The collection",
+      shop_lead: "Every candle is hand-poured in Tamil Nadu. Found one you love? Click “Contact” on any candle to send us your requirement.",
+      filter_all: "All",
+      contact_eyebrow: "Say hello to Kattangudi Handmade",
+      contact_title: "Contact us",
+      contact_lead: "Questions, custom wedding return-gift orders or festival hampers — send us a message and our handmade team will reply promptly.",
+      footer_studio_title: "Kattangudi Handmade (Est. 1999)",
+      footer_help_title: "Help Center (Direct WhatsApp)",
+      footer_chat_btn: "Chat on WhatsApp",
+      footer_trust_badge: "✔ Verified Handmade · 317 South Street, Kattangudi, Tamil Nadu",
+      trust_badge_1: "Est. 1999 in Tamil Nadu",
+      trust_badge_1_sub: "317 South Street, Kattangudi, Virudhunagar District",
+      trust_badge_2: "100% Real Handmade Photos",
+      trust_badge_2_sub: "Actual hand-poured candles photographed at our workshop",
+      trust_badge_3: "Wedding & Return Gifts",
+      trust_badge_3_sub: "Custom colours & bulk gift boxes shipped across India",
+      trust_badge_4: "Direct Handmade Support",
+      trust_badge_4_sub: "Talk directly with our makers at +91 78713 26620",
+      showcase_eyebrow: "The collection",
+      showcase_title: "Featured handmade candles",
+      showcase_lead: "Every photo below is a real candle hand-poured in Kattangudi. Tap “Contact” on any candle to send your requirement on our Contact page.",
+      btn_view_collection: "View full collection",
+      btn_contact_studio: "Contact"
+    },
+    ta: {
+      nav_home: "முகப்பு",
+      nav_shop: "மெழுகுவர்த்திகள்",
+      nav_about: "எங்களைப் பற்றி",
+      nav_contact: "தொடர்புக்கு",
+      hero_eyebrow: "தமிழ்நாடு, காட்டங்குடியில் கைவினையாகத் தயாரிக்கப்பட்டது · 1999 முதல்",
+      hero_title_1: "உங்கள் தருணங்களை",
+      hero_title_2: "ஒளிரச் செய்யுங்கள்",
+      hero_text: "அழகிய ரோஜாக்கள், துலிப் மலர்கள், பபுள் மெழுகுவர்த்திகள் மற்றும் பண்டிகை அகல் விளக்குகள் — ஒவ்வொரு Blooms & Flame Wax மெழுகுவர்த்தியும் எங்கள் காட்டங்குடி பட்டறையில் அன்புடன் கையால் உருவாக்கப்படுகிறது.",
+      hero_note: "✔ 100% உண்மையான தயாரிப்பு புகைப்படங்கள் · நேரடி தொடர்புக்கு: +91 78713 26620",
+      btn_shop_now: "தொடர்புக்கு",
+      btn_our_story: "எங்கள் கதை",
+      trust_1_title: "1999 முதல் தமிழ்நாட்டில்",
+      trust_1_desc: "விருதுநகர் மாவட்டம் காட்டங்குடியில் 25+ ஆண்டுகால பாரம்பரிய தயாரிப்பு",
+      trust_2_title: "100% உண்மையான புகைப்படங்கள்",
+      trust_2_desc: "இங்குள்ள அனைத்து மெழுகுவர்த்திகளும் எங்கள் பட்டறையில் நேரில் எடுக்கப்பட்டவை",
+      trust_3_title: "திருமண & விழா பரிசுகள்",
+      trust_3_desc: "திருமண தாம்பூலப் பரிசுகள் மற்றும் தீபாவளி விழாக்களுக்குச் சிறந்த தேர்வு",
+      trust_4_title: "நேரடி தயாரிப்பாளர் தொடர்பு",
+      trust_4_desc: "எங்கள் குழுவுடன் நேரடியாகப் பேச: +91 78713 26620 (செவ்வாய்–சனி)",
+      featured_eyebrow: "சிறப்புத் தொகுப்பு",
+      featured_title: "முக்கிய மெழுகுவர்த்திகள்",
+      featured_lead: "எங்கள் காட்டங்குடி பட்டறையின் உண்மையான கைவினை மெழுகுவர்த்திகள். உங்களுக்குப் பிடித்ததைத் தேர்வு செய்து தொடர்பு கொள்ளுங்கள்.",
+      btn_view_all: "அனைத்து மெழுகுவர்த்திகளையும் காண்க",
+      btn_enquire_contact: "தொடர்புக்கு",
+      price_on_request: "விலை அறிய தொடர்பு கொள்ளவும்",
+      cat_eyebrow: "வகைகள்",
+      cat_title: "நான்கு அழகிய வகைகள்",
+      cat_floral: "மலர் மெழுகுவர்த்திகள்",
+      cat_floral_sub: "ரோஜா, துலிப், தாமரை & டெய்ஸி",
+      cat_love: "அன்பு & பரிசுகள்",
+      cat_love_sub: "திருமணம் & விழாக்களுக்கான பரிசுகள்",
+      cat_sculpted: "பபுள் மெழுகுவர்த்திகள்",
+      cat_sculpted_sub: "நவீன வடிவங்கள், அழகிய நிறங்கள்",
+      cat_festive: "பண்டிகை அகல் விளக்குகள்",
+      cat_festive_sub: "மண் அகல் மெழுகுவர்த்தி பரிசுப் பெட்டிகள்",
+      craft_eyebrow: "கைவினைத் தரம்",
+      craft_title: "உருவாக்கும் முறை",
+      cta_eyebrow: "திருமணம் · தாம்பூலப் பரிசுகள் · தீபாவளி விழாக்கள்",
+      cta_title: "சிறப்பு மெழுகுவர்த்தி பரிசுகள் வேண்டுமா?",
+      cta_text: "நிகழ்ச்சி, நிறங்கள் மற்றும் எண்ணிக்கையைத் জানান — எங்கள் காட்டங்குடி பட்டறை உடனடியாகப் பதிலளிக்கும்.",
+      btn_message_email: "மின்னஞ்சல் செய்தி அனுப்புக",
+      shop_eyebrow: "எங்கள் தயாரிப்புகள்",
+      shop_title: "மெழுகுவர்த்தி தொகுப்பு",
+      shop_lead: "ஒவ்வொரு மெழுகுவர்த்தியும் எங்கள் தமிழ்நாடு பட்டறையில் கையால் செய்யப்பட்டது. விவரம் அறிய எந்த மெழுகுவர்த்தியையும் கிளிக் செய்யவும்.",
+      filter_all: "அனைத்தும்",
+      contact_eyebrow: "காட்டங்குடி பட்டறையைத் தொடர்பு கொள்ள",
+      contact_title: "தொடர்புக்கு",
+      contact_lead: "திருமணப் பரிசுகள், மொத்த ஆர்டர்கள் அல்லது விவரங்களுக்கு எங்களுக்குச் செய்தி அனுப்புங்கள்.",
+      footer_studio_title: "காட்டங்குடி பட்டறை (1999 முதல்)",
+      footer_help_title: "உதவி மையம் (வாட்ஸ்அப்)",
+      footer_chat_btn: "வாட்ஸ்அப்பில் உரையாட",
+      footer_trust_badge: "✔ நம்பகமான கைவினைப் பட்டறை · 317 தெற்குத் தெரு, காட்டங்குடி, தமிழ்நாடு"
+    },
+    hi: {
+      nav_home: "होम",
+      nav_shop: "कैंडल शॉप",
+      nav_about: "हमारे बारे में",
+      nav_contact: "संपर्क करें",
+      hero_eyebrow: "कट्टनगुडी, तमिलनाडु में हस्तनिर्मित · 1999 से",
+      hero_title_1: "अपने खास पलों को",
+      hero_title_2: "रोशन करें",
+      hero_text: "हाथ से तराशे गुलाब, ट्यूलिप, बबल क्यूब्स और त्योहारों के मिट्टी के दीये — हर Blooms & Flame Wax मोमबत्ती हमारी कट्टनगुडी कार्यशाला में प्यार से हाथों द्वारा बनाई जाती है।",
+      hero_note: "✔ 100% असली स्टूडियो फ़ोटो · शुद्ध सोया व आर्टिसनल वैक्स · सीधा संपर्क: +91 78713 26620",
+      btn_shop_now: "संपर्क करें",
+      btn_our_story: "हमारी कहानी",
+      trust_1_title: "1999 से स्थापित",
+      trust_1_desc: "कट्टनगुडी, तमिलनाडु में 25+ वर्षों की विश्वसनीय हस्तकला",
+      trust_2_title: "100% असली स्टूडियो फ़ोटो",
+      trust_2_desc: "हर मोमबत्ती हमारी अपनी कार्यशाला में बनाई और फ़ोटो खींची गई है",
+      trust_3_title: "शादी व रिटर्न गिफ्ट",
+      trust_3_desc: "भारतीय शादियों, दीपावली और समारोहों के लिए कस्टम रंग व बल्क गिफ्ट बॉक्स",
+      trust_4_title: "सीधा स्टूडियो संपर्क",
+      trust_4_desc: "हमारे कारीगरों से सीधे बात करें: +91 78713 26620 (मंगल–शनि)",
+      featured_eyebrow: "विशेष संग्रह",
+      featured_title: "प्रमुख हस्तनिर्मित मोमबत्तियाँ",
+      featured_lead: "हमारी कट्टनगुडी कार्यशाला की असली मोमबत्तियाँ। किसी भी मोमबत्ती के बारे में जानने के लिए 'संपर्क करें' पर क्लिक करें।",
+      btn_view_all: "पूरा कलेक्शन देखें",
+      btn_enquire_contact: "संपर्क करें",
+      price_on_request: "मूल्य के लिए संपर्क करें",
+      cat_eyebrow: "श्रेणियाँ",
+      cat_title: "रोशनी के चार रूप",
+      cat_floral: "फ्लोरल ब्लूम्स",
+      cat_floral_sub: "गुलाब, ट्यूलिप, कमल और डेज़ी",
+      cat_love: "लव और गिफ्टिंग",
+      cat_love_sub: "शादी और सालगिरह के लिए यादगार उपहार",
+      cat_sculpted: "स्कल्प्टेड बबल्स",
+      cat_sculpted_sub: "आधुनिक आकार और सुंदर रंग",
+      cat_festive: "फेस्टिव दीये",
+      cat_festive_sub: "दीपावली व पूजा के लिए टेराकोटा दीया गिफ्ट बॉक्स",
+      craft_eyebrow: "हाथों की कारीगरी",
+      craft_title: "पिघलने से चमकने तक",
+      cta_eyebrow: "शादियाँ · रिटर्न गिफ्ट · दीपावली और त्योहार",
+      cta_title: "कस्टम कैंडल गिफ्ट चाहते हैं?",
+      cta_text: "हमें अवसर, रंग और मात्रा बताएं — हमारी स्टूडियो टीम तुरंत संपर्क करेगी।",
+      btn_message_email: "ईमेल संदेश भेजें",
+      shop_eyebrow: "असली स्टूडियो कैटलॉग",
+      shop_title: "हमारा कलेक्शन",
+      shop_lead: "हर मोमबत्ती हमारे तमिलनाडु स्टूडियो में हाथ से बनाई गई है। ऑर्डर या पूछताछ के लिए संपर्क करें।",
+      filter_all: "सभी",
+      contact_eyebrow: "स्टूडियो से जुड़ें",
+      contact_title: "संपर्क करें",
+      contact_lead: "कस्टम ऑर्डर, शादी के रिटर्न गिफ्ट या किसी भी प्रश्न के लिए हमें संदेश भेजें।",
+      footer_studio_title: "कट्टनगुडी हैंडमेड (1999 से)",
+      footer_help_title: "सहायता केंद्र (व्हाट्सएप)",
+      footer_chat_btn: "व्हाट्सएप पर चैट करें",
+      footer_trust_badge: "✔ प्रमाणित हस्तनिर्मित · 317 साउथ स्ट्रीट, कट्टनगुडी, तमिलनाडु"
+    },
+    te: {
+      nav_home: "హోమ్",
+      nav_shop: "కొవ్వొత్తులు",
+      nav_about: "మా గురించి",
+      nav_contact: "సంప్రదించండి",
+      hero_eyebrow: "తమిళనాడులోని కట్టంగుడిలో చేతితో తయారైనవి · 1999 నుండి",
+      hero_title_1: "మీ శుభ తరుణాలను",
+      hero_title_2: "వెలిగించండి",
+      hero_text: "అందమైన గులాబీలు, తులిప్స్, బబుల్ క్యూబ్స్ మరియు పండుగ మట్టి దీపాలు — ప్రతి Blooms & Flame Wax కొవ్వొత్తి మా కట్టంగుడి వర్క్‌షాప్‌లో చేతితో తయారు చేయబడుతుంది.",
+      hero_note: "✔ 100% నిజమైన హ్యాండ్‌మేడ్ ఫోటోలు · నేరుగా సంప్రదించండి: +91 78713 26620",
+      btn_shop_now: "సంప్రదించండి",
+      btn_our_story: "మా కథ",
+      trust_1_title: "1999 నుండి తమిళనాడులో",
+      trust_1_desc: "25+ సంవత్సరాల సాంప్రదాయ కొవ్వొత్తుల తయారీ",
+      trust_2_title: "100% నిజమైన ఫోటోలు",
+      trust_2_desc: "ప్రతి కొవ్వొత్తి మా స్వంత వర్క్‌షాప్‌లో ఫోటో తీయబడింది",
+      trust_3_title: "పెళ్లి & రిటర్న్ గిఫ్ట్స్",
+      trust_3_desc: "వివాహాలు మరియు దీపావళి పండుగలకు కస్టమ్ బహుమతులు",
+      trust_4_title: "నేరుగా తయారీదారుల మద్దతు",
+      trust_4_desc: "మా తయారీదారులతో మాట్లాడండి: +91 78713 26620",
+      featured_eyebrow: "ప్రత్యేక కలెక్షన్",
+      featured_title: "ముఖ్యమైన కొవ్వొత్తులు",
+      featured_lead: "మా కట్టంగుడి వర్క్‌షాప్ నుండి నిజమైన చేతితో తయారు చేసిన కొవ్వొత్తులు.",
+      btn_view_all: "మొత్తం కలెక్షన్ చూడండి",
+      btn_enquire_contact: "సంప్రదించండి",
+      price_on_request: "ధర కోసం సంప్రదించండి",
+      cat_eyebrow: "వర్గాలు",
+      cat_title: "నాలుగు అందమైన రకాలు",
+      cat_floral: "ఫ్లోరల్ బ్లూమ్స్",
+      cat_love: "లవ్ & గిఫ్టింగ్",
+      cat_sculpted: "స్కల్ప్టెడ్ బబుల్స్",
+      cat_festive: "పండుగ దీపాలు",
+      btn_message_email: "మెసేజ్ ఇమెయిల్ పంపండి",
+      filter_all: "అన్నీ",
+      contact_title: "సంప్రదించండి",
+      footer_chat_btn: "వాట్సాప్‌లో చాట్ చేయండి",
+      footer_trust_badge: "✔ ధృవీకరించబడిన హ్యాండ్‌మేడ్ · కట్టంగుడి, తమిళనాడు"
+    },
+    ml: {
+      nav_home: "ഹോം",
+      nav_shop: "മെഴുകുതിരികൾ",
+      nav_about: "ഞങ്ങളെക്കുറിച്ച്",
+      nav_contact: "ബന്ധപ്പെടുക",
+      hero_eyebrow: "തമിഴ്‌നാട്ടിലെ കട്ടൻഗുഡിയിൽ കൈകൊണ്ട് നിർമ്മിച്ചത് · 1999 മുതൽ",
+      hero_title_1: "നിങ്ങളുടെ നിമിഷങ്ങളെ",
+      hero_title_2: "പ്രകാശിപ്പിക്കൂ",
+      hero_text: "മനോഹരമായ റോസാപ്പൂക്കൾ, തുലിപ്സ്, ബബിൾ ക്യൂബുകൾ, ഉത്സവ ദീപങ്ങൾ — ഓരോ Blooms & Flame Wax മെഴുകുതിരിയും ഞങ്ങളുടെ കട്ടൻഗുഡിയിൽ കൈകൊണ്ട് നിർമ്മിക്കുന്നതാണ്.",
+      hero_note: "✔ 100% യഥാർത്ഥ ഹാൻഡ്‌മെയ്ഡ് ചിത്രങ്ങൾ · നേരിട്ട് ബന്ധപ്പെടാൻ: +91 78713 26620",
+      btn_shop_now: "ബന്ധപ്പെടുക",
+      btn_our_story: "ഞങ്ങളുടെ കഥ",
+      trust_1_title: "1999 മുതൽ പ്രവർത്തനപാരമ്പര്യം",
+      trust_1_desc: "25+ വർഷത്തെ വിശ്വസ്തമായ കൈത്തൊഴിൽ പാരമ്പര്യം",
+      trust_2_title: "100% യഥാർത്ഥ ചിത്രങ്ങൾ",
+      trust_2_desc: "ഞങ്ങളുടെ സ്വന്തം വർക്ക്‌ഷോപ്പിൽ വെച്ച് എടുത്ത യഥാർത്ഥ ചിത്രങ്ങൾ",
+      trust_3_title: "വിവാഹ & റിട്ടേൺ സമ്മാനങ്ങൾ",
+      trust_3_desc: "വിവാഹങ്ങൾക്കും ആഘോഷങ്ങൾക്കും പ്രത്യേക സമ്മാന പാക്കേജുകൾ",
+      trust_4_title: "നേരിട്ടുള്ള হാൻഡ്‌മെയ്ഡ് സേവനം",
+      trust_4_desc: "വിളിക്കുക / വാട്സ്ആപ്പ്: +91 78713 26620",
+      featured_title: "പ്രധാന മെഴുകുതിരികൾ",
+      btn_view_all: "മുഴുവൻ ശേഖരവും കാണുക",
+      btn_enquire_contact: "ബന്ധപ്പെടുക",
+      price_on_request: "വില അറിയാൻ ബന്ധപ്പെടുക",
+      btn_message_email: "ഇമെയിൽ സന്ദേശം അയക്കുക",
+      filter_all: "എല്ലാം",
+      contact_title: "ബന്ധപ്പെടുക",
+      footer_chat_btn: "വാട്സ്ആപ്പിൽ ചാറ്റ് ചെയ്യുക",
+      footer_trust_badge: "✔ അംഗീകൃത ഹാൻഡ്‌മെയ്ഡ് · കട്ടൻഗുഡി, തമിഴ്‌നാട്"
+    },
+    kn: {
+      nav_home: "ಮುಖಪುಟ",
+      nav_shop: "ಮೇಣದಬತ್ತಿಗಳು",
+      nav_about: "ನಮ್ಮ ಬಗ್ಗೆ",
+      nav_contact: "ಸಂಪರ್ಕಿಸಿ",
+      hero_eyebrow: "ತಮಿಳುನಾಡಿನ ಕಟ್ಟಂಗುಡಿಯಲ್ಲಿ ಕೈಯಿಂದ ತಯಾರಿಸಲ್ಪಟ್ಟಿದೆ · 1999 ರಿಂದ",
+      hero_title_1: "ನಿಮ್ಮ ವಿಶೇಷ ಕ್ಷಣಗಳನ್ನು",
+      hero_title_2: "ಬೆಳಗಿಸಿ",
+      hero_text: "ಸುಂದರವಾದ ಗುಲಾಬಿಗಳು, ಟ್ಯುಲಿಪ್ಸ್, ಬಬಲ್ ಕ್ಯೂಬ್‌ಗಳು ಮತ್ತು ಹಬ್ಬದ ಮಣ್ಣಿನ ದೀಪಗಳು — ಪ್ರತಿಯೊಂದು Blooms & Flame Wax ಮೇಣದಬತ್ತಿಯನ್ನು ನಮ್ಮ ಕಟ್ಟಂಗುಡಿ ಕಾರ್ಯಾಗಾರದಲ್ಲಿ ಕೈಯಿಂದ ತಯಾರಿಸಲಾಗುತ್ತದೆ.",
+      hero_note: "✔ 100% ನೈಜ ಹ್ಯಾಂಡ್‌ಮೇಡ್ ಫೋಟೋಗಳು · ನೇರ ಸಂಪರ್ಕ: +91 78713 26620",
+      btn_shop_now: "ಸಂಪರ್ಕಿಸಿ",
+      btn_our_story: "ನಮ್ಮ ಕಥೆ",
+      trust_1_title: "1999 ರಿಂದ ಸ್ಥಾಪಿತ",
+      trust_1_desc: "25+ ವರ್ಷಗಳ ನಂಬಿಕಸ್ತ ಕರಕುಶಲ ಮೇಣದಬತ್ತಿ ತಯಾರಿಕೆ",
+      trust_2_title: "100% ನೈಜ ಫೋಟೋಗಳು",
+      trust_2_desc: "ಪ್ರತಿಯೊಂದು ಮೇಣದಬತ್ತಿಯೂ ನಮ್ಮದೇ ಕಾರ್ಯಾಗಾರದಲ್ಲಿ ತೆಗೆದ ನೈಜ ಫೋಟೋ",
+      trust_3_title: "ಮದುವೆ & ರಿಟರ್ನ್ ಗಿಫ್ಟ್ಸ್",
+      trust_3_desc: "ಮದುವೆ ಮತ್ತು ದೀಪಾವಳಿ ಹಬ್ಬಗಳಿಗೆ ವಿಶೇಷ ಉಡುಗೊರೆ ಬಾಕ್ಸ್‌ಗಳು",
+      trust_4_title: "ನೇರ ತಯಾರಕರ ಸಂಪರ್ಕ",
+      trust_4_desc: "ನೇರವಾಗಿ ಮಾತನಾಡಿ: +91 78713 26620",
+      featured_title: "ವಿಶೇಷ ಮೇಣದಬತ್ತಿಗಳು",
+      btn_view_all: "ಸಂಪೂರ್ಣ ಸಂಗ್ರಹ ನೋಡಿ",
+      btn_enquire_contact: "ಸಂಪರ್ಕಿಸಿ",
+      price_on_request: "ಬೆಲೆಗಾಗಿ ಸಂಪರ್ಕಿಸಿ",
+      btn_message_email: "ಇಮೇಲ್ ಸಂದೇಶ ಕಳುಹಿಸಿ",
+      filter_all: "ಎಲ್ಲವೂ",
+      contact_title: "ಸಂಪರ್ಕಿಸಿ",
+      footer_chat_btn: "ವಾಟ್ಸಾಪ್ ಚಾಟ್ ಮಾಡಿ",
+      footer_trust_badge: "✔ ಅಧಿಕೃತ ಹ್ಯಾಂಡ್‌ಮೇಡ್ · ಕಟ್ಟಂಗುಡಿ, ತಮಿಳುನಾಡು"
+    }
+  };
+
+  function getLang() {
+    var saved = "";
+    try { saved = localStorage.getItem(LANG_KEY) || ""; } catch (e) { saved = ""; }
+    return DICT[saved] ? saved : "en";
+  }
+
+  function t(key) {
+    var lang = getLang();
+    return (DICT[lang] && DICT[lang][key]) || DICT.en[key] || "";
+  }
+
+  function applyTranslations(langCode) {
+    var clean = DICT[langCode] ? langCode : getLang();
+    try { localStorage.setItem(LANG_KEY, clean); } catch (e) { /* ignore */ }
+    document.documentElement.setAttribute("lang", clean);
+
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n");
+      var val = (DICT[clean] && DICT[clean][key]) || DICT.en[key];
+      if (val) el.textContent = val;
+    });
+
+    document.querySelectorAll("select[data-lang-switcher]").forEach(function (sel) {
+      if (sel.value !== clean) sel.value = clean;
+    });
+
+    window.dispatchEvent(new CustomEvent("bfw:langchange", { detail: { lang: clean } }));
+  }
+
+  window.BFW_I18N = {
+    LANGUAGES: LANGUAGES,
+    getLang: getLang,
+    setLang: applyTranslations,
+    t: t,
+    apply: function () { applyTranslations(getLang()); }
+  };
+
+  document.addEventListener("DOMContentLoaded", function () {
+    applyTranslations(getLang());
+  });
+})();

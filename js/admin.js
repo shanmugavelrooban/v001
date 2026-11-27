@@ -25,12 +25,12 @@
 
   var SITE_IMAGE_SLOTS = [
     { key: "site-logo", title: "Brand Logo (Header, Footer & Admin)", def: "assets/images/logo-bfw.png" },
-    { key: "cat-floral", title: "Home Category 1 — Floral Blooms", def: "assets/images/products/tulip-bouquet.png" },
-    { key: "cat-love", title: "Home Category 2 — Love & Gifting", def: "assets/images/products/holding-hands-heart.png" },
-    { key: "cat-sculpted", title: "Home Category 3 — Sculpted Bubbles", def: "assets/images/products/peach-bubble-sphere.png" },
-    { key: "cat-festive", title: "Home Category 4 — Festive Diyas", def: "assets/images/products/festive-diya-gift-box.png" },
-    { key: "about-story-1", title: "About Page — Story Image 1", def: "assets/images/products/rose-in-hands-pillar.png" },
-    { key: "about-story-2", title: "About Page — Story Image 2", def: "assets/images/products/peony-heart.png" }
+    { key: "cat-floral", title: "Home Category 1 — Floral Blooms", def: "assets/images/products/tulip-bouquet.jpg" },
+    { key: "cat-love", title: "Home Category 2 — Love & Gifting", def: "assets/images/products/holding-hands-heart.jpg" },
+    { key: "cat-sculpted", title: "Home Category 3 — Sculpted Bubbles", def: "assets/images/products/peach-bubble-sphere.jpg" },
+    { key: "cat-festive", title: "Home Category 4 — Festive Diyas", def: "assets/images/products/festive-diya-gift-box.jpg" },
+    { key: "about-story-1", title: "About Page — Story Image 1", def: "assets/images/products/rose-in-hands-pillar.jpg" },
+    { key: "about-story-2", title: "About Page — Story Image 2", def: "assets/images/products/peony-heart.jpg" }
   ];
 
   var DEFAULT_ADMIN_IDS = ["srooban58@gmail.com", "srooban1211@gmail.com", "hello@bloomsflamewax.in", "admin"];
@@ -541,7 +541,7 @@
         if (Array.isArray(saved) && saved.length) {
           saved.forEach(function (p) {
             if (p && typeof p.image === "string") {
-              p.image = p.image.replace(/^(assets\/images\/products\/[a-z0-9\-]+)\.jpe?g$/i, "$1.png");
+              p.image = p.image.replace(/^(assets\/images\/products\/[a-z0-9\-]+)\.png$/i, "$1.jpg");
             }
           });
           return saved;

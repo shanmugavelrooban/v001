@@ -1,16 +1,21 @@
 /* =========================================================
    Blooms & Flame Wax — public configuration & Theme Engine (config.js)
+   Single Small Icon Cycle Button: Light -> Auto -> Dark -> Light
+   • Light Mode: Crisp alabaster theme + clear background video
+   • Auto Mode:  Morning/Day (06:00–17:59) -> Light Mode
+                 Night       (18:00–05:59) -> Dark Mode
+   • Dark Mode:  Deep plum-obsidian theme + clear background video
    ========================================================= */
 (function () {
   "use strict";
 
   // =========================================================================
-  // ★ STEP 1: PASTE YOUR GOOGLE APPS SCRIPT /exec URL RIGHT BELOW ON LINE 12 ★
+  // ★ STEP 1: PASTE YOUR GOOGLE APPS SCRIPT /exec URL RIGHT BELOW ON LINE 14 ★
   // Example: "https://script.google.com/macros/s/AKfycbx.../exec"
   // =========================================================================
   var CONFIG_DATA = {
     APPS_SCRIPT_WEB_APP_URL: "https://script.google.com/macros/s/AKfycbw27wj_rQuP4n4WSeb48MjzVCpoZKsYuN56ACGDUdNdijJXACbdq_N3pMMclNq_lIrv/exec",
-    VERSION: "1.0.0",
+    VERSION: "1.1.0",
     WHATSAPP_NUMBER: "917871326620",
     REQUEST_TIMEOUT_MS: 15000,
     PRODUCT_CACHE_MINUTES: 5
@@ -20,12 +25,13 @@
   rootEl.classList.add("js");
 
   var STORAGE_KEY = "bfw_apps_script_url";
-  var THEME_KEY = "bfw_theme_mode_v2"; // "dark" | "auto" | "light"
+  var THEME_KEY = "bfw_theme_mode_v3"; // "light" | "auto" | "dark"
+  var ORDER = ["light", "auto", "dark"];
 
   function getThemeMode() {
     var saved = "";
     try { saved = localStorage.getItem(THEME_KEY) || ""; } catch (e) { saved = ""; }
-    return (saved === "dark" || saved === "light" || saved === "auto") ? saved : "auto";
+    return (saved === "light" || saved === "auto" || saved === "dark") ? saved : "auto";
   }
 
   /** Morning/Day (06:00–17:59) -> Light Mode | Night (18:00–05:59) -> Dark Mode */
@@ -39,25 +45,68 @@
     return mode === "light" ? "light" : "dark";
   }
 
-  function applyTheme(mode) {
-    var cleanMode = (mode === "dark" || mode === "light" || mode === "auto") ? mode : getThemeMode();
-    var effective = resolveEffectiveTheme(cleanMode);
-    rootEl.setAttribute("data-theme-mode", cleanMode);
-    rootEl.setAttribute("data-theme", effective);
-    try { localStorage.setItem(THEME_KEY, cleanMode); } catch (e) { /* ignore */ }
+  var MODE_META = {
+    light: {
+      label: "Light Mode (Click for Auto Mode)",
+      short: "Light",
+      svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2 12h2.5M19.5 12H22M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>'
+    },
+    auto: {
+      label: "Auto Mode: Day Light / Night Dark (Click for Dark Mode)",
+      short: "Auto",
+      svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/><path d="M12 7v5l3 2"/></svg>'
+    },
+    dark: {
+      label: "Dark Mode (Click for Light Mode)",
+      short: "Dark",
+      svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>'
+    }
+  };
+
+  function updateThemeButtonsDOM(cleanMode) {
+    var meta = MODE_META[cleanMode] || MODE_META.auto;
+    // Update single cycle buttons [data-cycle-theme]
+    document.querySelectorAll("[data-cycle-theme]").forEach(function (btn) {
+      btn.setAttribute("data-mode", cleanMode);
+      btn.setAttribute("title", meta.label);
+      btn.setAttribute("aria-label", meta.label);
+      btn.innerHTML = meta.svg;
+    });
+    // Also support any legacy [data-set-theme] buttons if present
     document.querySelectorAll("[data-set-theme]").forEach(function (btn) {
       var isCur = btn.getAttribute("data-set-theme") === cleanMode;
       btn.setAttribute("aria-pressed", String(isCur));
       btn.classList.toggle("is-active", isCur);
     });
+  }
+
+  function applyTheme(mode) {
+    var cleanMode = (mode === "light" || mode === "auto" || mode === "dark") ? mode : getThemeMode();
+    var effective = resolveEffectiveTheme(cleanMode);
+    rootEl.setAttribute("data-theme-mode", cleanMode);
+    rootEl.setAttribute("data-theme", effective);
+    try { localStorage.setItem(THEME_KEY, cleanMode); } catch (e) { /* ignore */ }
+    updateThemeButtonsDOM(cleanMode);
     window.dispatchEvent(new CustomEvent("bfw:themechange", {
       detail: { mode: cleanMode, theme: effective, isDaytime: isDaytimeNow() }
     }));
     return effective;
   }
 
+  /** Cycles Light -> Auto -> Dark -> Light on each click */
+  function cycleThemeMode() {
+    var cur = getThemeMode();
+    var nextIdx = (ORDER.indexOf(cur) + 1) % ORDER.length;
+    var nextMode = ORDER[nextIdx];
+    applyTheme(nextMode);
+    return nextMode;
+  }
+
   // Apply theme immediately in <head> before body paints
   applyTheme(getThemeMode());
+  document.addEventListener("DOMContentLoaded", function () {
+    updateThemeButtonsDOM(getThemeMode());
+  });
 
   // Re-check time schedule every 15 seconds and on tab focus so Auto mode switches at 6 AM / 6 PM automatically
   setInterval(function () {
@@ -74,7 +123,9 @@
     getMode: getThemeMode,
     getEffective: function () { return rootEl.getAttribute("data-theme") || "dark"; },
     isDaytime: isDaytimeNow,
-    setMode: applyTheme
+    setMode: applyTheme,
+    cycleMode: cycleThemeMode,
+    getMeta: function (m) { return MODE_META[m || getThemeMode()] || MODE_META.auto; }
   };
 
   function normalizeAppsScriptUrl(input) {
@@ -93,7 +144,6 @@
   function resolveActiveUrl() {
     var fromFile = normalizeAppsScriptUrl(CONFIG_DATA.APPS_SCRIPT_WEB_APP_URL);
     if (fromFile) {
-      // Also persist to localStorage so contact.html and admin.html always share it
       try { localStorage.setItem(STORAGE_KEY, fromFile); } catch (e) { /* ignore */ }
       return fromFile;
     }

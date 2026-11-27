@@ -120,5 +120,8 @@
     window.addEventListener("storage", function (e) {
       if (e.key === "bfw_admin_products") loadAndRenderShop();
     });
+    window.addEventListener("bfw:langchange", function () {
+      render();
+    });
   });
 })();

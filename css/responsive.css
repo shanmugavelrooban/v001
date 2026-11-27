@@ -9,6 +9,7 @@
 @media (max-width: 1024px) {
   :root { --header-h: 68px; }
   .hero__grid { grid-template-columns: 1fr 0.8fr; gap: 2rem; }
+  .trust-strip__grid { grid-template-columns: repeat(2, 1fr); }
   .cat-grid { grid-template-columns: repeat(2, 1fr); }
   .features { grid-template-columns: repeat(2, 1fr); }
   .values { grid-template-columns: repeat(2, 1fr); }
@@ -16,25 +17,53 @@
 }
 
 @media (max-width: 860px) {
-  /* Task 5 (144359.png & 144415.png): Theme-adaptive mobile navigation drawer below header bar */
+  /* Responsive header & mobile drawer: never overlap brand title and language selector */
   .nav {
-    gap: 0.5rem;
+    gap: 0.4rem;
   }
   .brand {
     min-width: 0;
-    gap: 0.5rem;
+    gap: 0.45rem;
+    flex: 1 1 auto;
   }
   .brand__name {
     white-space: nowrap;
-    font-size: clamp(0.96rem, 3.8vw, 1.25rem);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: clamp(0.95rem, 3.6vw, 1.2rem);
   }
   .nav__controls {
-    gap: 0.45rem;
+    gap: 0.35rem;
     flex-shrink: 0;
     z-index: 120;
   }
+  .lang-switch {
+    height: 28px;
+    padding: 0 0.35rem;
+    gap: 0.2rem;
+  }
+  .lang-switch__icon {
+    width: 12px;
+    height: 12px;
+  }
+  .lang-switch__select {
+    max-width: 58px;
+    height: 24px !important;
+    font-size: 0.68rem !important;
+    padding: 0 0.1rem !important;
+  }
+  .theme-cycle-btn {
+    width: 30px;
+    height: 30px;
+  }
+  .theme-cycle-btn svg {
+    width: 14px;
+    height: 14px;
+  }
   .nav__toggle {
     display: inline-block;
+    width: 34px;
+    height: 34px;
     z-index: 120;
     flex-shrink: 0;
   }
@@ -77,7 +106,7 @@
   }
   body.nav-open { overflow: hidden; }
 
-  .hero { text-align: left; }
+  .hero { text-align: center; }
   .hero__grid { grid-template-columns: 1fr; }
   .hero__scroll { display: none; }
   .split { grid-template-columns: 1fr; }
@@ -87,12 +116,16 @@
 }
 
 @media (max-width: 640px) {
-  .container { width: min(100% - 1.5rem, var(--container)); }
-  .brand__name { font-size: clamp(0.92rem, 3.6vw, 1.08rem); }
-  .brand__logo { width: 34px; height: 34px; }
-  .theme-switch__btn { width: 30px; height: 30px; }
-  .theme-switch__btn svg { width: 15px; height: 15px; }
-  .nav__toggle { width: 38px; height: 38px; }
+  .container { width: min(100% - 1.4rem, var(--container)); }
+  .brand__name { font-size: clamp(0.86rem, 3.4vw, 1.02rem); }
+  .brand__logo { width: 32px; height: 32px; }
+  .lang-switch { height: 26px; padding: 0 0.3rem; }
+  .lang-switch__icon { display: none; }
+  .lang-switch__select { max-width: 52px; height: 22px !important; font-size: 0.66rem !important; padding: 0 !important; }
+  .theme-cycle-btn { width: 28px; height: 28px; }
+  .theme-cycle-btn svg { width: 13px; height: 13px; }
+  .nav__toggle { width: 32px; height: 32px; }
+  .trust-strip__grid { grid-template-columns: 1fr; }
   .hero__title { font-size: clamp(2.5rem, 12vw, 3.4rem); }
   .hero__actions .btn { flex: 1 1 100%; }
   .hero__badge { display: none; }

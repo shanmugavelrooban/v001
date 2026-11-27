@@ -12,15 +12,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&amp;family=Jost:wght@300;400;500;600&amp;display=swap">
-  <link rel="stylesheet" href="css/style.css?v=21">
-  <link rel="stylesheet" href="css/animations.css?v=21">
-  <link rel="stylesheet" href="css/responsive.css?v=21">
-  <script src="js/config.js?v=21"></script>
-  <script src="js/security.js?v=21" defer></script>
-  <script src="js/products-data.js?v=21" defer></script>
-  <script src="js/layout.js?v=21" defer></script>
-  <script src="js/main.js?v=21" defer></script>
-  <script src="js/shop.js?v=21" defer></script>
+  <link rel="stylesheet" href="css/style.css?v=24">
+  <link rel="stylesheet" href="css/animations.css?v=24">
+  <link rel="stylesheet" href="css/responsive.css?v=24">
+  <script src="js/config.js?v=24"></script>
+  <script src="js/security.js?v=24" defer></script>
+  <script src="js/products-data.js?v=24" defer></script>
+  <script src="js/i18n.js?v=24" defer></script>
+  <script src="js/layout.js?v=24" defer></script>
+  <script src="js/main.js?v=24" defer></script>
+  <script src="js/shop.js?v=24" defer></script>
 </head>
 <body data-page="shop">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -38,10 +39,10 @@
   <main id="main">
     <section class="page-hero">
       <div class="container">
-        <p class="eyebrow">Product showcase</p>
-        <h1 class="page-hero__title">The collection</h1>
-        <p class="page-hero__lead">Every candle is hand-poured in our Tamil Nadu studio. This is a showcase — no cart, no checkout. Found one you love? Send us an enquiry.</p>
-        <div class="center-actions"><a class="btn btn--primary" href="#showcase">Shop now <span class="flame" aria-hidden="true"></span></a></div>
+        <p class="eyebrow" data-i18n="shop_eyebrow">Product showcase</p>
+        <h1 class="page-hero__title" data-i18n="shop_title">The collection</h1>
+        <p class="page-hero__lead" data-i18n="shop_lead">Every candle is hand-poured in Tamil Nadu. Tap “Contact” on any candle to open our Contact page with your selection pre-filled.</p>
+        <div class="center-actions"><a class="btn btn--primary" href="contact.html"><span data-i18n="btn_shop_now">Contact</span> <span class="flame" aria-hidden="true"></span></a></div>
       </div>
     </section>
 
@@ -50,16 +51,16 @@
         <h2 class="visually-hidden" id="showcase-title">All candles</h2>
         <div class="toolbar" role="search">
           <div class="chips" role="group" aria-label="Filter by category">
-            <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
-            <button class="chip" type="button" data-filter="floral" aria-pressed="false">Floral Blooms</button>
-            <button class="chip" type="button" data-filter="love" aria-pressed="false">Love &amp; Gifting</button>
-            <button class="chip" type="button" data-filter="sculpted" aria-pressed="false">Sculpted Bubbles</button>
-            <button class="chip" type="button" data-filter="festive" aria-pressed="false">Festive Diyas</button>
+            <button class="chip" type="button" data-filter="all" aria-pressed="true" data-i18n="filter_all">All</button>
+            <button class="chip" type="button" data-filter="floral" aria-pressed="false" data-i18n="cat_floral">Floral Blooms</button>
+            <button class="chip" type="button" data-filter="love" aria-pressed="false" data-i18n="cat_love">Love &amp; Gifting</button>
+            <button class="chip" type="button" data-filter="sculpted" aria-pressed="false" data-i18n="cat_sculpted">Sculpted Bubbles</button>
+            <button class="chip" type="button" data-filter="festive" aria-pressed="false" data-i18n="cat_festive">Festive Diyas</button>
           </div>
           <label class="search">
             <span class="visually-hidden">Search candles</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-            <input id="product-search" type="search" placeholder="Search rose, diya, heart…" maxlength="60" autocomplete="off">
+            <input id="product-search" type="search" placeholder="Search rose, diya, heart…" data-i18n-placeholder="search_placeholder" maxlength="60" autocomplete="off">
           </label>
         </div>
         <p class="result-count" id="result-count" aria-live="polite"></p>
@@ -72,15 +73,15 @@
     <section class="section">
       <div class="container">
         <div class="cta" data-reveal="zoom">
-          <h2>Need a bulk or custom order?</h2>
-          <p>Return gifts, weddings, festivals or corporate hampers — tell us what you need.</p>
-          <a class="btn btn--primary" href="contact.html">Contact the studio</a>
+          <h2 data-i18n="cta_title">Need a bulk or custom order?</h2>
+          <p data-i18n="cta_desc">Return gifts, weddings, festivals or corporate hampers — tell us what you need.</p>
+          <a class="btn btn--primary" href="contact.html" data-i18n="btn_contact_studio">Contact</a>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Quick-view dialog -->
+  <!-- Quick-view dialog (Task 2: button redirects to contact.html) -->
   <dialog class="modal" id="product-modal" aria-labelledby="modal-name">
     <div class="modal__inner">
       <div class="modal__media"><img data-modal-img src="assets/images/products/placeholder.svg" alt=""></div>
@@ -89,7 +90,7 @@
         <h2 id="modal-name" data-modal-name></h2>
         <p data-modal-desc></p>
         <p class="product-card__price" data-modal-price></p>
-        <a class="btn btn--whatsapp" data-modal-enquire href="https://wa.me/917871326620" target="_blank" rel="noopener noreferrer">Chat on WhatsApp for this candle</a>
+        <a class="btn btn--primary" data-modal-enquire data-i18n="btn_enquire_contact" href="contact.html">Contact</a>
       </div>
     </div>
     <button class="modal__close" type="button" aria-label="Close">×</button>
